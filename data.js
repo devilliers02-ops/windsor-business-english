@@ -181,7 +181,11 @@ window.WBE_DATA = (function () {
     { id: 'wachannel', name: 'WhatsApp Channel', icon: 'fab fa-whatsapp', url: '' }
   ];
 
+  /* Visit statistics (GoatCounter). Paste your site code here, for example 'windsor-business-english'.
+     It is the part before .goatcounter.com. While it is empty, no tracking runs at all. */
+  var ANALYTICS = { goatcounter: 'windsor-business-english' };
+
   var PROOF = { learners: 0, companies: 0, hours: 0, sectors: 0 };
 
-  return { SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
+  return { ANALYTICS: ANALYTICS, SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
 })();

@@ -339,8 +339,8 @@
     }
     function band() { var b = L.bands[0]; L.bands.forEach(function (x) { if (score >= x.min) b = x; }); return b; }
     function wa(msg) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg); }
-    function finish(up) { stopClock(); elapsed = Math.min(LIMIT, Math.floor((Date.now() - t0) / 1000)); timedOut = up; chosen = -1; stage = 'result'; render(); }
-    function start() { qi = 0; score = 0; answered = 0; timedOut = false; chosen = -1; stage = 'quiz'; startClock(); render(); }
+    function finish(up) { track('level-finished', 'Level check finished'); stopClock(); elapsed = Math.min(LIMIT, Math.floor((Date.now() - t0) / 1000)); timedOut = up; chosen = -1; stage = 'result'; render(); }
+    function start() { track('level-start', 'Level check started'); qi = 0; score = 0; answered = 0; timedOut = false; chosen = -1; stage = 'quiz'; startClock(); render(); }
     function render() {
       root.replaceChildren();
       if (stage === 'intro') {
@@ -397,9 +397,58 @@
     render();
   }
 
+  /* ---------- Visit statistics: GoatCounter, cookie-free, off until a site code is set ---------- */
+  var gcQueue = [];
+  function track(name, title) {
+    var ev = { path: 'event/' + name, title: title || name, event: true };
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count(ev); else if (gcQueue) gcQueue.push(ev);
+  }
+  function initAnalytics() {
+    var code = D.ANALYTICS && D.ANALYTICS.goatcounter;
+    if (!code || !/^[a-z0-9-]+$/i.test(code)) { gcQueue = null; return; }
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) { gcQueue = null; return; }
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter', 'https://' + code + '.goatcounter.com/count');
+    s.onload = function () { var q = gcQueue || []; gcQueue = null; q.forEach(function (ev) { window.goatcounter.count(ev); }); };
+    s.onerror = function () { gcQueue = null; };
+    document.head.appendChild(s);
+
+    /* what people do: delegated clicks */
+    document.addEventListener('click', function (e) {
+      var n;
+      if ((n = e.target.closest('a[href*="wa.me"]'))) return track('whatsapp-click', 'WhatsApp button');
+      if ((n = e.target.closest('a[href^="mailto:"]'))) return track('email-click', 'Email button');
+      if ((n = e.target.closest('[data-prog]'))) return track('programme-open/' + n.getAttribute('data-prog'), 'Programme opened');
+      if ((n = e.target.closest('[data-lang]'))) return track('language/' + n.getAttribute('data-lang'), 'Language');
+      if ((n = e.target.closest('[data-theme-set]'))) return track('theme/' + n.getAttribute('data-theme-set'), 'Theme');
+      if ((n = e.target.closest('a.soc'))) return track('social-click', 'Social link');
+      if ((n = e.target.closest('a[href^="policies.html"]'))) return track('policies-open', 'Policies');
+      if ((n = e.target.closest('#newsGrid a'))) return track('news-click', 'News story opened');
+    });
+
+    /* how far people read: each section once */
+    if ('IntersectionObserver' in window) {
+      var seen = {};
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { var id = e.target.id; if (e.isIntersecting && !seen[id]) { seen[id] = 1; track('section/' + id, 'Section ' + id); io.unobserve(e.target); } });
+      }, { threshold: 0.35 });
+      $$('main section[id]').forEach(function (n) { io.observe(n); });
+    }
+
+    /* time spent: seconds the tab is visible, reported at three milestones */
+    var visible = 0, marks = [30, 60, 180], fired = {};
+    setInterval(function () {
+      if (document.visibilityState !== 'visible') return;
+      visible += 1;
+      marks.forEach(function (m) { if (visible >= m && !fired[m]) { fired[m] = 1; track('time-on-site/' + m + 's', 'Stayed ' + m + ' seconds'); } });
+    }, 1000);
+  }
+
   /* ---------- shared: "your message is ready" panel (nothing is sent until a button is tapped) ---------- */
   var MAIL = 'devilliers02@gmail.com';
   function readyPanel(host, o) {
+    track('message-ready/' + (o.event || 'form'), 'Message prepared');
     host.replaceChildren();
     var w = el('div', 'ready');
     w.appendChild(el('i', 'fas fa-circle-check rk'));
@@ -479,7 +528,7 @@
           ? 'Bonjour Windsor, je suis ' + name + (org ? ' (' + org + ')' : '') + '. Je souhaite un devis et plus d’informations sur : ' + t(P.name) + '. Format souhaité : ' + t(fmt.text) + '. Téléphone/WhatsApp : ' + lead.phone.trim() + '.' + (lead.email ? ' E-mail : ' + lead.email.trim() + '.' : '') + (lead.msg.trim() ? ' Précisions : ' + lead.msg.trim() : '')
           : 'Hello Windsor, I am ' + name + (org ? ' (' + org + ')' : '') + '. I would like a quote and more information about: ' + t(P.name) + '. Preferred format: ' + t(fmt.text) + '. Phone/WhatsApp: ' + lead.phone.trim() + '.' + (lead.email ? ' Email: ' + lead.email.trim() + '.' : '') + (lead.msg.trim() ? ' Notes: ' + lead.msg.trim() : '');
         mode = 'ready';
-        readyPanel(host, { title: t({ en: 'Your request is ready', fr: 'Votre demande est prête' }), msg: msg, subject: 'Windsor enquiry: ' + t(P.name), onEdit: function () { mode = 'form'; buildForm(P, host); } });
+        readyPanel(host, { title: t({ en: 'Your request is ready', fr: 'Votre demande est prête' }), msg: msg, subject: 'Windsor enquiry: ' + t(P.name), event: 'quote/' + P.id, onEdit: function () { mode = 'form'; buildForm(P, host); } });
       });
       host.appendChild(form);
     }
@@ -578,7 +627,7 @@
         var msg = fr
           ? 'Bonjour Windsor, voici mon retour sur « ' + pname + ' »' + (st.rating ? ' (' + st.rating + '/5)' : '') + ' : « ' + st.text.trim() + ' » De la part de : ' + who + '. ' + (st.ok ? 'Vous pouvez publier ce témoignage avec mon nom et mon poste.' : 'Merci de ne pas le publier.')
           : 'Hello Windsor, here is my feedback on “' + pname + '”' + (st.rating ? ' (' + st.rating + '/5)' : '') + ': “' + st.text.trim() + '” From: ' + who + '. ' + (st.ok ? 'You may publish this with my name and role.' : 'Please do not publish it.');
-        readyPanel(host, { title: t({ en: 'Your feedback is ready', fr: 'Votre témoignage est prêt' }), msg: msg, subject: 'Windsor feedback: ' + pname, onEdit: build });
+        readyPanel(host, { title: t({ en: 'Your feedback is ready', fr: 'Votre témoignage est prêt' }), msg: msg, subject: 'Windsor feedback: ' + pname, event: 'feedback', onEdit: build });
       });
       host.appendChild(form);
     }
@@ -748,7 +797,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initQuotes(); initPortal(); initCount(); initReveal();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();
