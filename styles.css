@@ -790,3 +790,20 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
   .stage .vc-koro{position:absolute;right:-14px;top:24px;bottom:auto;width:min(66%,250px)}
   .stage .vc-level{position:absolute;right:-14px;bottom:-16px;width:min(48%,210px);margin:0}
 }
+
+/* ---------- take your exam ---------- */
+.exams{background:var(--sand)}
+.exgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.exams .pcard2 small{font:600 .72rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);margin-left:6px}
+.exams .pcard2{display:flex;flex-direction:column;gap:10px}
+.exams .pcard2 .rlink{margin-top:auto;padding-top:6px}
+.exsteps{margin-top:clamp(32px,5vw,52px);background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);padding:clamp(22px,4vw,40px)}
+.exsteps h3{font:700 1.4rem var(--f-display);color:var(--head);margin-bottom:18px}
+.exsteps ol{list-style:none;counter-reset:x;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.exsteps li{counter-increment:x;position:relative;padding-top:46px;min-width:0}
+.exsteps li::before{content:counter(x);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);font:700 .95rem var(--f-display);display:grid;place-items:center}
+.exsteps b{display:block;color:var(--head);margin-bottom:4px}
+.exsteps li span{font-size:.9rem;color:var(--muted)}
+.exact{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:1000px){.exsteps ol{grid-template-columns:1fr 1fr}.exgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.exsteps ol,.exgrid{grid-template-columns:1fr}.exact .btn{width:100%}}
