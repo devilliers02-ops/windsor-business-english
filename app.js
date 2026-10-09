@@ -138,7 +138,7 @@
     document.addEventListener('wbe:lang', function () { /* data-fr already swapped on both copies */ });
   }
 
-  /* ---------- Koro chat demo ---------- */
+  /* ---------- Windsor chat demo ---------- */
   function initKoro() {
     var box = $('msgs'); if (!box) return;
     var timers = [], started = false;
@@ -745,7 +745,7 @@
     fig.style.setProperty('--ar', spec.ar || '4 / 3');
     fig.replaceChildren();
     if (spec.src) {
-      var img = el('img'); img.src = spec.src; img.alt = t(hint); img.loading = 'lazy'; img.decoding = 'async';
+      var img = el('img'); img.src = spec.src; img.alt = t(spec.alt || hint); img.loading = key === 'hero' ? 'eager' : 'lazy'; img.decoding = 'async'; if (spec.pos) img.style.objectPosition = spec.pos;
       fig.appendChild(img);
     } else {
       var w = el('div', 'ph-in'); w.setAttribute('role', 'img'); w.setAttribute('aria-label', t({ en: 'Photo placeholder: ', fr: 'Emplacement photo : ' }) + t(hint));
@@ -849,7 +849,7 @@
     function question() {
       var q = D.PORTAL[idx], box = $('quizBody'); box.replaceChildren();
       var bar = el('div', 'lbar'), f = el('i'); f.style.width = (idx / D.PORTAL.length * 100) + '%'; bar.appendChild(f);
-      var h = el('div', 'lq', (idx + 1) + '. ' + q.q), opts = el('div', 'lo'), note = el('div', 'kn', t({ en: 'Koro: choose the best answer.', fr: 'Koro : choisissez la meilleure réponse.' }));
+      var h = el('div', 'lq', (idx + 1) + '. ' + q.q), opts = el('div', 'lo'), note = el('div', 'kn', t({ en: 'Windsor: choose the best answer.', fr: 'Windsor : choisissez la meilleure réponse.' }));
       note.setAttribute('aria-live', 'polite');
       q.o.forEach(function (txt, i) {
         var b = el('button', null, txt); b.type = 'button';
@@ -857,7 +857,7 @@
           $$('button', opts).forEach(function (x) { x.disabled = true; });
           var ok = i === q.a; if (ok) score++;
           b.classList.add(ok ? 'ok' : 'no'); if (!ok) opts.children[q.a].classList.add('ok');
-          note.textContent = 'Koro: ' + (ok ? t({ en: 'Correct! ', fr: 'Correct ! ' }) : '') + t(q.n);
+          note.textContent = 'Windsor: ' + (ok ? t({ en: 'Correct! ', fr: 'Correct ! ' }) : '') + t(q.n);
           var nx = el('button', 'btn btn-gold', idx + 1 < D.PORTAL.length ? t({ en: 'Next', fr: 'Suivant' }) : t({ en: 'See my score', fr: 'Voir mon score' }));
           nx.type = 'button'; nx.style.marginTop = '18px';
           nx.onclick = function () { idx++; if (idx < D.PORTAL.length) question(); else finish(); };

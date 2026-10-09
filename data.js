@@ -85,7 +85,7 @@ window.WBE_DATA = (function () {
   ];
 
   var KORO = [
-    { who: 'bot', en: 'Hello! I am Koro, your Windsor Business English tutor. Which sector do you work in?', fr: 'Bonjour ! Je suis Koro, votre tuteur Windsor en Business English. Dans quel secteur travaillez-vous ?' },
+    { who: 'bot', en: 'Hello! I am Windsor, your Business English tutor. Which sector do you work in?', fr: 'Bonjour ! Je suis Windsor, votre tuteur en Business English. Dans quel secteur travaillez-vous ?' },
     { who: 'me', en: 'Banking. Help me write a follow-up email.', fr: 'La banque. Aidez-moi à rédiger un e-mail de relance.' },
     { who: 'bot', en: 'Of course. Try: “Further to our meeting on Monday, I am writing to confirm the key points we discussed.” Shall we continue?', fr: 'Bien sûr. Essayez : « Further to our meeting on Monday, I am writing to confirm the key points we discussed. » On continue ?' },
     { who: 'me', en: 'Yes, add a polite deadline.', fr: 'Oui, ajoutez une échéance polie.' },
@@ -185,13 +185,13 @@ window.WBE_DATA = (function () {
      While `src` is empty the slot shows an elegant placeholder describing the ideal photo and size. */
   function bi(en, fr) { return { en: en, fr: fr }; }
   var PHOTOS = {
-    hero: { src: '', ar: '4 / 5', size: '1200 × 1500 px, portrait', hint: bi('Confident professionals in a bright Abidjan meeting room', 'Des professionnels sûrs d’eux dans une salle de réunion lumineuse à Abidjan') },
-    about1: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('A coach leading a small-group lesson', 'Un coach qui anime une leçon en petit groupe') },
-    about2: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('One-to-one executive coaching', 'Coaching individuel de dirigeant') },
-    about3: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('A learner practising with Koro on a laptop', 'Un apprenant qui s’entraîne avec Koro sur ordinateur') },
-    events: { src: '', ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('A Windsor workshop day in progress', 'Une journée d’atelier Windsor en cours') },
-    join: { src: '', ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('The Windsor team together', 'L’équipe Windsor réunie') },
-    prog: { src: '', ar: '21 / 8', size: '1600 × 610 px, wide', hint: bi('This programme in action', 'Ce programme en action') }
+    hero: { src: 'images/hero.jpg', pos: 'center 30%', alt: bi('Two smiling professionals standing in a bright office', 'Deux professionnels souriants dans un bureau lumineux'), ar: '4 / 5', size: '1200 × 1500 px, portrait', hint: bi('Confident professionals in a bright Abidjan meeting room', 'Des professionnels sûrs d’eux dans une salle de réunion lumineuse à Abidjan') },
+    about1: { src: 'images/about-1.jpg', pos: 'center 45%', alt: bi('Colleagues reviewing documents together around a table', 'Des collègues examinent des documents autour d’une table'), ar: '4 / 3', size: '1200 × 900 px', hint: bi('A coach leading a small-group lesson', 'Un coach qui anime une leçon en petit groupe') },
+    about2: { src: 'images/about-2.jpg', pos: 'center 40%', alt: bi('Two people in a relaxed one-to-one conversation', 'Deux personnes en conversation individuelle détendue'), ar: '4 / 3', size: '1200 × 900 px', hint: bi('One-to-one executive coaching', 'Coaching individuel de dirigeant') },
+    about3: { src: 'images/about-3.jpg', pos: 'center 40%', alt: bi('Two colleagues discussing a document beside a laptop', 'Deux collègues discutent d’un document près d’un ordinateur'), ar: '4 / 3', size: '1200 × 900 px', hint: bi('A learner practising with Windsor on a laptop', 'Un apprenant qui s’entraîne avec Windsor sur ordinateur') },
+    events: { src: 'images/events.jpg', pos: 'center 58%', alt: bi('A presenter addressing a team in a conference room', 'Un intervenant s’adresse à une équipe dans une salle de conférence'), ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('A Windsor workshop day in progress', 'Une journée d’atelier Windsor en cours') },
+    join: { src: 'images/join.jpg', pos: 'center 62%', alt: bi('A diverse team meeting around a long table', 'Une équipe diverse réunie autour d’une longue table'), ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('The Windsor team together', 'L’équipe Windsor réunie') },
+    prog: { src: 'images/about-1.jpg', pos: 'center 45%', alt: bi('Colleagues reviewing documents together around a table', 'Des collègues examinent des documents autour d’une table'), ar: '21 / 8', size: '1600 × 610 px, wide', hint: bi('This programme in action', 'Ce programme en action') }
   };
 
   /* Visit statistics (GoatCounter). Paste your site code here, for example 'windsor-business-english'.

@@ -781,3 +781,12 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
 .pm-steps li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);font-size:.94rem}
 .pm-steps li::before{content:counter(s);position:absolute;left:14px;top:11px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);font:700 .85rem var(--f-display);display:grid;place-items:center}
 @media (max-width:620px){.pm-acc summary{flex-direction:column;align-items:flex-start;gap:6px}.pm-tab{padding:9px 10px}}
+
+/* hero: the photo leads, the three cards sit on its edges (desktop) */
+@media (min-width:901px){
+  .stage{min-height:480px;padding-bottom:0;margin-bottom:clamp(40px,5vw,64px)}
+  .hero-photo{inset:0}
+  .stage .vc-mail{position:absolute;left:-20px;bottom:34px;width:min(80%,320px);margin:0}
+  .stage .vc-koro{position:absolute;right:-14px;top:24px;bottom:auto;width:min(66%,250px)}
+  .stage .vc-level{position:absolute;right:-14px;bottom:-16px;width:min(48%,210px);margin:0}
+}
