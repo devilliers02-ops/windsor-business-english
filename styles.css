@@ -787,6 +787,6 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
   .stage{min-height:480px;padding-bottom:0;margin-bottom:clamp(40px,5vw,64px)}
   .hero-photo{inset:0}
   .stage .vc-mail{position:absolute;left:-20px;bottom:34px;width:min(80%,320px);margin:0}
-  .stage .vc-koro{position:absolute;left:-14px;right:auto;top:24px;bottom:auto;width:min(56%,230px)}
+  .stage .vc-koro{position:absolute;right:-14px;top:24px;bottom:auto;width:min(66%,250px)}
   .stage .vc-level{position:absolute;right:-14px;bottom:-16px;width:min(48%,210px);margin:0}
 }
