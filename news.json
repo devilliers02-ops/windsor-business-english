@@ -1,0 +1,89 @@
+{
+  "updated": "2026-10-06",
+  "items": [
+    {
+      "id": "2026-10-06-ecowas-investment-forum",
+      "date": "2026-10-06",
+      "source": "Leadership",
+      "url": "https://leadership.ng/ecowas-bank-unveils-2027-investment-forum-targets-capital-inflows-inclusive-growth",
+      "topic": { "en": "Investment", "fr": "Investissement" },
+      "title": "ECOWAS bank announces its 2027 Investment Forum",
+      "summary": "The ECOWAS Bank for Investment and Development will host its Investment Forum on 7 and 8 April 2027, bringing together investors, development banks, policymakers and private-sector leaders.",
+      "vocab": [
+        { "term": "to host", "fr": "accueillir, organiser", "eg": "Our bank will host the forum in April." },
+        { "term": "stakeholders", "fr": "parties prenantes", "eg": "We will brief all stakeholders on Monday." },
+        { "term": "capital inflows", "fr": "entrées de capitaux", "eg": "Capital inflows rose in the third quarter." }
+      ]
+    },
+    {
+      "id": "2026-10-06-boad-borrowing",
+      "date": "2026-10-06",
+      "source": "The Rio Times",
+      "url": "https://www.riotimesonline.com/boad-cci-ci-mobilise-2600-billion-cfa-francs-2026/",
+      "topic": { "en": "Banking", "fr": "Banque" },
+      "title": "BOAD briefs Ivorian companies on how to borrow from it",
+      "summary": "On 1 October in Abidjan, the West African Development Bank explained to local firms how they can access its financing.",
+      "vocab": [
+        { "term": "to access financing", "fr": "accéder à un financement", "eg": "Small firms struggle to access financing." },
+        { "term": "briefing", "fr": "séance d’information", "eg": "The briefing starts at 10 a.m." },
+        { "term": "lender", "fr": "prêteur", "eg": "The lender approved the facility." }
+      ]
+    },
+    {
+      "id": "2026-10-05-ci-development-plan",
+      "date": "2026-10-05",
+      "source": "BusinessDay",
+      "url": "https://businessday.ng/pro/article/cote-divoires-us206-billion-investment-bet-cocoa-crude-and-the-cost-of-caution/",
+      "topic": { "en": "Economy", "fr": "Économie" },
+      "title": "Côte d’Ivoire’s US$206 billion investment plan",
+      "summary": "The 2026–2030 National Development Plan envisages up to US$206 billion in investment, with about 70 percent expected to come from the private sector.",
+      "vocab": [
+        { "term": "to envisage", "fr": "prévoir, envisager", "eg": "The plan envisages new roads and ports." },
+        { "term": "private sector", "fr": "secteur privé", "eg": "The private sector will fund most projects." },
+        { "term": "to be expected to", "fr": "devoir normalement", "eg": "Sales are expected to rise next year." }
+      ]
+    },
+    {
+      "id": "2026-10-05-cocoa-model",
+      "date": "2026-10-05",
+      "source": "Ecofin Agency",
+      "url": "https://www.ecofinagency.com/news-agriculture/1408-58147-cote-d-ivoire-reshapes-its-cocoa-model-to-protect-markets-and-capture-more-value",
+      "topic": { "en": "Agriculture", "fr": "Agriculture" },
+      "title": "Côte d’Ivoire reshapes its cocoa model to capture more value",
+      "summary": "The country is adjusting how it manages cocoa, aiming to protect its markets and keep more of the value of its crop at home.",
+      "vocab": [
+        { "term": "value addition", "fr": "valeur ajoutée", "eg": "Processing locally increases value addition." },
+        { "term": "to capture value", "fr": "capter de la valeur", "eg": "We want to capture more value in the chain." },
+        { "term": "to reshape", "fr": "remodeler", "eg": "The reform will reshape the sector." }
+      ]
+    },
+    {
+      "id": "2026-10-04-attijariwafa-ghana",
+      "date": "2026-10-04",
+      "source": "BusinessDay",
+      "url": "https://businessday.ng/africa/article/africa-finance-in-brief-africas-markets-face-fresh-growth-debt-investment-pressures/",
+      "topic": { "en": "Banking", "fr": "Banque" },
+      "title": "Morocco’s Attijariwafa to buy Société Générale’s Ghana business",
+      "summary": "Attijariwafa is acquiring Société Générale’s operations in Ghana, another sign of African banks expanding across borders.",
+      "vocab": [
+        { "term": "to acquire", "fr": "acquérir, racheter", "eg": "The group plans to acquire a local bank." },
+        { "term": "cross-border", "fr": "transfrontalier", "eg": "Cross-border payments are growing fast." },
+        { "term": "to expand", "fr": "se développer", "eg": "We want to expand into West Africa." }
+      ]
+    },
+    {
+      "id": "2026-10-04-financial-power-map",
+      "date": "2026-10-04",
+      "source": "BusinessDay",
+      "url": "https://businessday.ng/africa/article/africa-finance-in-brief-africas-financial-power-map-is-changing",
+      "topic": { "en": "Finance", "fr": "Finance" },
+      "title": "Africa’s financial power map is changing",
+      "summary": "Kenya and Egypt now place more banks in the global top 500 than Nigeria and South Africa, a sign that the continent’s banking centres of gravity are shifting.",
+      "vocab": [
+        { "term": "ranking", "fr": "classement", "eg": "The bank moved up in the ranking." },
+        { "term": "to shift", "fr": "évoluer, se déplacer", "eg": "The focus is shifting to digital banking." },
+        { "term": "to overtake", "fr": "dépasser", "eg": "Sales overtook last year’s total in June." }
+      ]
+    }
+  ]
+}

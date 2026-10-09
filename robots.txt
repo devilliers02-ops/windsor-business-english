@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://devilliers02-ops.github.io/windsor-business-english/sitemap.xml
