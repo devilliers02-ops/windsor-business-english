@@ -745,7 +745,7 @@
     fig.style.setProperty('--ar', spec.ar || '4 / 3');
     fig.replaceChildren();
     if (spec.src) {
-      var img = el('img'); img.src = spec.src; img.alt = t(spec.alt || hint); img.loading = key === 'hero' ? 'eager' : 'lazy'; img.decoding = 'async'; if (spec.pos) img.style.objectPosition = spec.pos;
+      var img = el('img'); img.src = spec.src; img.alt = t(spec.alt || hint); img.loading = key === 'hero' ? 'eager' : 'lazy'; img.decoding = 'async'; if (spec.pos) img.style.objectPosition = spec.pos; if (spec.zoom) { img.style.transform = 'scale(' + spec.zoom + ')'; img.style.transformOrigin = spec.origin || 'center'; }
       fig.appendChild(img);
     } else {
       var w = el('div', 'ph-in'); w.setAttribute('role', 'img'); w.setAttribute('aria-label', t({ en: 'Photo placeholder: ', fr: 'Emplacement photo : ' }) + t(hint));
