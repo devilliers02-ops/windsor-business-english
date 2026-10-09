@@ -181,11 +181,24 @@ window.WBE_DATA = (function () {
     { id: 'wachannel', name: 'WhatsApp Channel', icon: 'fab fa-whatsapp', url: '' }
   ];
 
+  /* Photo slots. Put image files in the images/ folder and set `src` (for example 'images/hero.jpg').
+     While `src` is empty the slot shows an elegant placeholder describing the ideal photo and size. */
+  function bi(en, fr) { return { en: en, fr: fr }; }
+  var PHOTOS = {
+    hero: { src: '', ar: '4 / 5', size: '1200 × 1500 px, portrait', hint: bi('Confident professionals in a bright Abidjan meeting room', 'Des professionnels sûrs d’eux dans une salle de réunion lumineuse à Abidjan') },
+    about1: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('A coach leading a small-group lesson', 'Un coach qui anime une leçon en petit groupe') },
+    about2: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('One-to-one executive coaching', 'Coaching individuel de dirigeant') },
+    about3: { src: '', ar: '4 / 3', size: '1200 × 900 px', hint: bi('A learner practising with Koro on a laptop', 'Un apprenant qui s’entraîne avec Koro sur ordinateur') },
+    events: { src: '', ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('A Windsor workshop day in progress', 'Une journée d’atelier Windsor en cours') },
+    join: { src: '', ar: '21 / 8', size: '2100 × 800 px, wide', hint: bi('The Windsor team together', 'L’équipe Windsor réunie') },
+    prog: { src: '', ar: '21 / 8', size: '1600 × 610 px, wide', hint: bi('This programme in action', 'Ce programme en action') }
+  };
+
   /* Visit statistics (GoatCounter). Paste your site code here, for example 'windsor-business-english'.
      It is the part before .goatcounter.com. While it is empty, no tracking runs at all. */
   var ANALYTICS = { goatcounter: 'windsor-business-english' };
 
   var PROOF = { learners: 0, companies: 0, hours: 0, sectors: 0 };
 
-  return { ANALYTICS: ANALYTICS, SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
+  return { PHOTOS: PHOTOS, ANALYTICS: ANALYTICS, SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
 })();

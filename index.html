@@ -6,16 +6,17 @@
 <script>try{var t=localStorage.getItem("wbe_theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" data-auto-replace-svg="nest" defer></script>
 <script src="lang.js" defer></script>
 <script src="data.js" defer></script>
 <script src="programmes.js" defer></script>
+<script src="syllabus.js" defer></script>
 <script src="app.js" defer></script>
 <link rel="canonical" href="https://devilliers02-ops.github.io/windsor-business-english/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F6DB0'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23F3D98B'%3EW%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#0F6DB0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E3B33'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23E6CF9F'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0E3B33">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Windsor Business English">
 <meta property="og:description" content="Windsor Business English: Business English coaching, certifications and an AI tutor for professionals in Abidjan. Anglais professionnel à Abidjan.">
@@ -36,8 +37,9 @@
     <ul class="nav" id="nav">
       <li><a href="#about" data-fr="À propos">About</a></li>
       <li><a href="#programmes" data-fr="Programmes">Programmes</a></li>
-      <li><a href="#koro" data-fr="Koro, IA">Koro AI tutor</a></li>
-      <li><a href="#practice" data-fr="Pratique">Free practice</a></li>
+      <li><a href="#events" data-fr="Événements">Events</a></li>
+      <li><a href="#koro" data-fr="Koro IA">Koro AI</a></li>
+      <li><a href="#practice" data-fr="Pratique">Practice</a></li>
       <li><a href="#blog" data-fr="Blog">Blog</a></li>
       <li><a href="#join" data-fr="Carrières">Join us</a></li>
       <li><a href="#contact" data-fr="Contact">Contact</a></li>
@@ -76,7 +78,8 @@
         <li><i class="fas fa-industry"></i><span data-fr="Un anglais adapté à votre secteur">English for your sector</span></li>
       </ul>
     </div>
-    <div class="stage in" style="--d:3" aria-hidden="true">
+    <div class="stage in" style="--d:3">
+      <figure class="photo hero-photo" data-photo="hero"></figure>
       <div class="vc vc-mail">
         <div class="to"><span data-fr="À : Directeur financier">To: Finance Director</span><span>Email · B2</span></div>
         <p>Further to our meeting <mark>on</mark> Monday, could you please confirm <mark>by</mark> Thursday?</p>
@@ -122,6 +125,12 @@
         <div data-r><h3><i class="fas fa-flag"></i><span data-fr="Notre mission">Our mission</span></h3><p data-fr="Faire de chaque professionnel africain un communicant d’excellence.">To turn every African professional into a world-class communicator.</p></div>
         <div data-r><h3><i class="fas fa-binoculars"></i><span data-fr="Notre vision">Our vision</span></h3><p data-fr="Un réseau panafricain d’excellence en Business English d’ici 2031.">A Pan-African network of Business English excellence by 2031.</p></div>
       </div>
+    </div>
+
+    <div class="photo-row">
+      <figure class="photo" data-photo="about1"></figure>
+      <figure class="photo" data-photo="about2"></figure>
+      <figure class="photo" data-photo="about3"></figure>
     </div>
 
     <div class="tags">
@@ -266,6 +275,24 @@
     </div>
     <p class="paynote"><span data-fr="Les détails figurent dans nos conditions d’inscription et de paiement.">Full details are in our enrolment and payment terms.</span> <a href="policies.html#enrolment" data-fr="Lire les conditions">Read the terms</a></p>
     <div class="center-cta"><a class="btn btn-navy btn-lg" href="#contact" data-wa="Payment options"><i class="fab fa-whatsapp"></i><span data-fr="Poser une question sur le paiement">Ask about payment options</span></a></div>
+  </div>
+</section>
+
+<!-- ================= EVENTS ================= -->
+<section class="sec events" id="events">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Événements">Events</span>
+      <h2 class="h2" data-fr="Apprenez avec nous, <span class='g'>en direct</span>" data-h>Learn with us, <span class="g">live</span></h2>
+      <p class="lead" data-fr="Webinaires, journées d’atelier et cohortes. Les dates sont annoncées ici et dans le groupe WhatsApp des membres.">Webinars, workshop days and cohorts. Dates are announced here and in the members’ WhatsApp group.</p>
+    </div>
+    <figure class="photo wide" data-photo="events"></figure>
+    <div class="tabs etabs" id="evTabs" role="tablist" aria-label="Events" data-fr-aria="Événements"></div>
+    <div class="egrid" id="evGrid" aria-live="polite"><p class="nempty" data-fr="Chargement des événements…">Loading events…</p></div>
+    <div class="ecta" data-r>
+      <div><h3 data-fr="Un événement pour votre organisation ?">An event for your organisation?</h3><p data-fr="Ateliers, conférences et sessions de formation dans vos locaux, en anglais professionnel.">Workshops, talks and training sessions at your premises, in professional English.</p></div>
+      <a class="btn btn-gold btn-lg" href="#contact" data-wa="Host an event for our organisation"><i class="fab fa-whatsapp"></i><span data-fr="Discuter d’un événement">Discuss an event</span></a>
+    </div>
   </div>
 </section>
 
@@ -534,6 +561,8 @@
       <p class="lead" data-fr="Windsor grandit à Abidjan et dans toute la région UEMOA. Nous aimons rencontrer des personnes passionnées par l’enseignement et par les résultats de leurs apprenants.">Windsor is growing across Abidjan and the UEMOA region. We love meeting people who care about great teaching and real results for learners.</p>
     </div>
 
+    <figure class="photo wide" data-photo="join"></figure>
+
     <ul class="perks">
         <li data-r><i class="fas fa-industry"></i><b data-fr="Enseignez de vraies carrières">Teach real careers</b><span data-fr="Banquiers, ingénieurs, juristes et entrepreneurs qui apprennent l’anglais de leur métier.">Bankers, engineers, lawyers and founders learning the English their jobs demand.</span></li>
         <li data-r><i class="fas fa-robot"></i><b data-fr="Des outils qui prolongent votre impact">Tools that extend your reach</b><span data-fr="Koro et le LMS Windsor prolongent la pratique entre vos séances.">Koro and the Windsor LMS carry practice between your sessions.</span></li>
@@ -642,6 +671,7 @@
       <div><h4 data-fr="Ressources">Resources</h4><ul>
         <li><a href="#portal" data-fr="Espace apprenant">Learner portal</a></li>
         <li><a href="#koro" data-fr="Koro, tuteur IA">Koro AI tutor</a></li>
+        <li><a href="#events" data-fr="Événements">Events</a></li>
         <li><a href="#level" data-fr="Test de niveau gratuit">Free level check</a></li>
         <li><a href="#practice" data-fr="Pratique gratuite">Free practice</a></li>
         <li><a href="#blog" data-fr="Blog">Blog</a></li>

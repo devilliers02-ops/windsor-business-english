@@ -485,7 +485,7 @@
   function initProgrammes() {
     var modal = $('progModal'), box = $('pmBox'), grid = document.querySelector('#programmes .grid3');
     if (!modal || !box || !grid) return;
-    var cur = null, opener = null, mode = 'form', lead = { name: '', phone: '', email: '', org: '', format: 'any', msg: '' };
+    var cur = null, opener = null, ptab = 'overview', mode = 'form', lead = { name: '', phone: '', email: '', org: '', format: 'any', msg: '' };
     var FORMATS = [
       { value: 'any', label: { en: 'No preference', fr: 'Pas de préférence' }, text: { en: 'no preference', fr: 'pas de préférence' } },
       { value: 'abidjan', label: { en: 'Face to face in Abidjan', fr: 'En présentiel à Abidjan' }, text: { en: 'face to face in Abidjan', fr: 'en présentiel à Abidjan' } },
@@ -540,22 +540,58 @@
       var head = el('div', 'pm-head'), ic = el('div', 'ico'); ic.appendChild(el('i', 'fas ' + P.icon)); head.appendChild(ic);
       var hd = el('div'); var h3 = el('h3', null, t(P.name)); h3.id = 'pmTitle'; hd.append(h3, el('p', 'tg', t(P.tag))); head.appendChild(hd); box.appendChild(head);
       var body = el('div', 'pm-body'), info = el('div', 'pm-info');
+      var pf = el('figure', 'photo pm-photo'); pf.setAttribute('data-dyn', '1'); photoFill(pf, 'prog-' + P.id, { en: t(P.name), fr: t(P.name) }); info.appendChild(pf);
       info.appendChild(el('p', 'pm-intro', t(P.intro)));
       var facts = el('dl', 'pm-facts');
       P.facts.forEach(function (fa) { var d = el('div'); d.append(el('dt', null, t(fa.k)), el('dd', null, t(fa.v))); facts.appendChild(d); });
       info.appendChild(facts);
-      info.appendChild(section(t({ en: 'Who it is for', fr: 'À qui s’adresse-t-il' }), list(P.who, 'pm-list', 'fa-user-check')));
-      info.appendChild(section(t({ en: 'What you will achieve', fr: 'Ce que vous allez atteindre' }), list(P.outcomes, 'pm-list', 'fa-check')));
-      info.appendChild(section(t({ en: 'What you will cover', fr: 'Ce que vous allez travailler' }), list(P.modules, 'pm-list mods', 'fa-angle-right')));
-      if (P.flow) {
-        var ol = el('ol', 'pm-flow');
-        P.flow.forEach(function (st) { var li = el('li'); li.appendChild(el('b', null, t(st.when))); li.appendChild(el('span', null, t(st.what))); ol.appendChild(li); });
-        var fs = section(t({ en: 'How it runs', fr: 'Comment ça se déroule' }), ol);
-        fs.appendChild(el('p', 'pm-note', t({ en: 'Indicative structure. The exact plan is confirmed in your quote.', fr: 'Structure indicative. Le plan exact est confirmé dans votre devis.' })));
-        info.appendChild(fs);
+      var TABS = [['overview', { en: 'Overview', fr: 'Aperçu' }], ['syllabus', { en: 'Syllabus', fr: 'Programme détaillé' }], ['sample', { en: 'Sample lesson', fr: 'Exemple de leçon' }], ['faq', { en: 'FAQ', fr: 'FAQ' }]];
+      if (!P.syllabus) ptab = 'overview';
+      if (P.syllabus) {
+        var bar = el('div', 'pm-tabs'); bar.setAttribute('role', 'tablist');
+        TABS.forEach(function (x) {
+          var tb = el('button', 'pm-tab', t(x[1])); tb.type = 'button'; tb.setAttribute('role', 'tab'); tb.setAttribute('aria-selected', String(ptab === x[0]));
+          tb.onclick = function () { ptab = x[0]; render(); }; bar.appendChild(tb);
+        });
+        info.appendChild(bar);
       }
-      var chips = el('div', 'pm-chips'); P.inc.forEach(function (c) { chips.appendChild(el('span', null, t(c))); });
-      info.appendChild(section(t({ en: 'Included', fr: 'Inclus' }), chips));
+      var pane = el('div', 'pm-pane'); info.appendChild(pane);
+      if (ptab === 'syllabus') {
+        var acc = el('div', 'pm-acc');
+        P.syllabus.forEach(function (mo, i) {
+          var d = el('details'); if (i === 0) d.open = true;
+          var sm = el('summary'); sm.appendChild(el('b', null, t(mo.t))); sm.appendChild(el('span', 'mh', t(mo.h))); d.appendChild(sm);
+          d.appendChild(list(mo.pts, 'pm-list', 'fa-angle-right'));
+          var oc = el('p', 'mo'); oc.appendChild(el('b', null, t({ en: 'You will be able to: ', fr: 'Vous serez capable de : ' }))); oc.appendChild(document.createTextNode(t(mo.out))); d.appendChild(oc);
+          acc.appendChild(d);
+        });
+        pane.appendChild(acc);
+        if (P.assess) pane.appendChild(section(t({ en: 'How progress is assessed', fr: 'Comment la progression est évaluée' }), el('p', 'pm-p', t(P.assess))));
+        if (P.prereq) pane.appendChild(section(t({ en: 'Who can join', fr: 'Qui peut s’inscrire' }), el('p', 'pm-p', t(P.prereq))));
+        if (P.schedule) pane.appendChild(section(t({ en: 'Schedule and delivery', fr: 'Calendrier et format' }), el('p', 'pm-p', t(P.schedule))));
+        pane.appendChild(el('p', 'pm-note', t({ en: 'Indicative content. The exact plan is confirmed in your quote.', fr: 'Contenu indicatif. Le plan exact est confirmé dans votre devis.' })));
+      } else if (ptab === 'sample' && P.sample) {
+        var ol2 = el('ol', 'pm-steps'); P.sample.steps.forEach(function (st) { ol2.appendChild(el('li', null, t(st))); });
+        pane.appendChild(section(t(P.sample.title), ol2));
+        pane.appendChild(el('p', 'pm-note', t({ en: 'A taste of the kind of activity you will do in class.', fr: 'Un aperçu du type d’activité que vous ferez en cours.' })));
+      } else if (ptab === 'faq' && P.faq) {
+        var fq = el('div', 'pm-acc');
+        P.faq.forEach(function (it) { var d = el('details'); var sm = el('summary'); sm.appendChild(el('b', null, t(it.q))); d.appendChild(sm); d.appendChild(el('p', 'pm-p', t(it.a))); fq.appendChild(d); });
+        pane.appendChild(fq);
+      } else {
+        pane.appendChild(section(t({ en: 'Who it is for', fr: 'À qui s’adresse-t-il' }), list(P.who, 'pm-list', 'fa-user-check')));
+        pane.appendChild(section(t({ en: 'What you will achieve', fr: 'Ce que vous allez atteindre' }), list(P.outcomes, 'pm-list', 'fa-check')));
+        pane.appendChild(section(t({ en: 'What you will cover', fr: 'Ce que vous allez travailler' }), list(P.modules, 'pm-list mods', 'fa-angle-right')));
+        if (P.flow) {
+          var ol = el('ol', 'pm-flow');
+          P.flow.forEach(function (st) { var li = el('li'); li.appendChild(el('b', null, t(st.when))); li.appendChild(el('span', null, t(st.what))); ol.appendChild(li); });
+          var fs = section(t({ en: 'How it runs', fr: 'Comment ça se déroule' }), ol);
+          fs.appendChild(el('p', 'pm-note', t({ en: 'Indicative structure. The exact plan is confirmed in your quote.', fr: 'Structure indicative. Le plan exact est confirmé dans votre devis.' })));
+          pane.appendChild(fs);
+        }
+        var chips = el('div', 'pm-chips'); P.inc.forEach(function (c) { chips.appendChild(el('span', null, t(c))); });
+        pane.appendChild(section(t({ en: 'Included', fr: 'Inclus' }), chips));
+      }
       var alt = el('div', 'pm-alt');
       var a1 = el('a', 'btn btn-line btn-sm', t({ en: 'Take the free level check', fr: 'Faire le test de niveau gratuit' })); a1.href = '#level'; a1.onclick = close;
       alt.appendChild(a1); info.appendChild(alt);
@@ -564,7 +600,7 @@
       buildForm(P, side);
     }
     function open(id, from) {
-      cur = id; opener = from || document.activeElement; mode = 'form';
+      cur = id; ptab = 'overview'; opener = from || document.activeElement; mode = 'form';
       lead = { name: lead.name, phone: lead.phone, email: lead.email, org: lead.org, format: lead.format, msg: '' };
       render(); modal.classList.add('open'); document.documentElement.classList.add('nolock'); modal.scrollTop = 0;
       var cb = box.querySelector('.mx'); if (cb) cb.focus();
@@ -702,6 +738,77 @@
     document.addEventListener('wbe:lang', paint); paint();
   }
 
+  /* ---------- Photo slots: real image when `src` is set, an elegant placeholder otherwise ---------- */
+  function photoFill(fig, key, hintOverride) {
+    var spec = D.PHOTOS[key] || D.PHOTOS.prog;
+    var hint = hintOverride || spec.hint;
+    fig.style.setProperty('--ar', spec.ar || '4 / 3');
+    fig.replaceChildren();
+    if (spec.src) {
+      var img = el('img'); img.src = spec.src; img.alt = t(hint); img.loading = 'lazy'; img.decoding = 'async';
+      fig.appendChild(img);
+    } else {
+      var w = el('div', 'ph-in'); w.setAttribute('role', 'img'); w.setAttribute('aria-label', t({ en: 'Photo placeholder: ', fr: 'Emplacement photo : ' }) + t(hint));
+      w.appendChild(el('i', 'fas fa-camera'));
+      w.appendChild(el('b', null, t({ en: 'Photo', fr: 'Photo' })));
+      w.appendChild(el('span', null, t(hint)));
+      if (spec.size) w.appendChild(el('small', null, spec.size));
+      fig.appendChild(w);
+    }
+  }
+  function initPhotos() {
+    function paint() { $$('[data-photo]').forEach(function (f) { if (!f.hasAttribute('data-dyn')) photoFill(f, f.getAttribute('data-photo')); }); }
+    document.addEventListener('wbe:lang', paint); paint();
+  }
+
+  /* ---------- Events (reads events.json) ---------- */
+  function initEvents() {
+    var tabsEl = $('evTabs'), grid = $('evGrid'); if (!tabsEl || !grid) return;
+    var items = [], tab = 'upcoming', failed = false, today = new Date().toISOString().slice(0, 10);
+    function isPast(e) { return e.status === 'past' || (e.date && e.date < today); }
+    function fmtParts(d) {
+      var dt = new Date(d + 'T00:00:00'), loc = WBE.lang() === 'fr' ? 'fr-FR' : 'en-GB';
+      return { day: dt.getDate(), mon: dt.toLocaleDateString(loc, { month: 'short' }) };
+    }
+    function waLink(e) {
+      var title = t(e.title), when = e.date ? ' (' + e.date + ')' : '';
+      var msg = WBE.lang() === 'fr' ? 'Bonjour Windsor, je souhaite m’inscrire ou être informé pour : ' + title + when + '.' : 'Hello Windsor, I would like to register or be notified about: ' + title + when + '.';
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+    function paint() {
+      tabsEl.replaceChildren(); grid.replaceChildren();
+      [['upcoming', { en: 'Upcoming', fr: 'À venir' }], ['past', { en: 'Past', fr: 'Passés' }]].forEach(function (x) {
+        var b = el('button', 'stab', t(x[1])); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(tab === x[0]));
+        b.onclick = function () { tab = x[0]; paint(); }; tabsEl.appendChild(b);
+      });
+      if (failed) { grid.appendChild(el('p', 'nempty', t({ en: 'Events could not be loaded. Please refresh the page.', fr: 'Les événements n’ont pas pu être chargés. Actualisez la page.' }))); return; }
+      var list = items.filter(function (e) { return tab === 'past' ? isPast(e) : !isPast(e); });
+      list.sort(function (a, b) { return (a.date || '9999') < (b.date || '9999') ? -1 : 1; });
+      if (!list.length) { grid.appendChild(el('p', 'nempty', tab === 'past' ? t({ en: 'Past events will appear here.', fr: 'Les événements passés apparaîtront ici.' }) : t({ en: 'New dates are coming soon. Message us to be told first.', fr: 'De nouvelles dates arrivent bientôt. Écrivez-nous pour être prévenu en premier.' }))); return; }
+      list.forEach(function (e, i) {
+        var c = el('article', 'ecard'); c.style.animationDelay = (i * 70) + 'ms';
+        var dt = el('div', 'edate');
+        if (e.date) { var p = fmtParts(e.date); dt.append(el('b', null, String(p.day)), el('span', null, p.mon)); }
+        else { dt.append(el('i', 'far fa-calendar'), el('em', null, e.status === 'recurring' ? t({ en: 'Recurring', fr: 'Récurrent' }) : t({ en: 'Dates soon', fr: 'Dates à venir' }))); }
+        var body = el('div', 'ebody');
+        body.append(el('span', 'etype', t(e.type)), el('h3', null, t(e.title)), el('p', null, t(e.desc)));
+        var meta = el('ul', 'emeta');
+        function li(icon, txt) { var l = el('li'); l.appendChild(el('i', 'fas ' + icon)); l.appendChild(document.createTextNode(txt)); meta.appendChild(l); }
+        if (e.recurrence) li('fa-rotate', t(e.recurrence));
+        if (e.date) li('fa-calendar-day', e.date);
+        if (e.time) li('fa-clock', e.time);
+        if (e.place) li('fa-location-dot', t(e.place));
+        body.appendChild(meta);
+        if (!isPast(e)) { var a = el('a', 'btn btn-gold btn-sm'); a.href = waLink(e); a.target = '_blank'; a.rel = 'noopener'; a.appendChild(el('i', 'fab fa-whatsapp')); a.appendChild(el('span', null, t(e.cta || { en: 'Register', fr: 'S’inscrire' }))); body.appendChild(a); }
+        c.append(dt, body); grid.appendChild(c);
+      });
+    }
+    document.addEventListener('wbe:lang', paint);
+    if (window.fetch) fetch('events.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function (j) { items = j.items || []; paint(); }).catch(function () { failed = true; paint(); });
+    else { failed = true; paint(); }
+  }
+
   /* ---------- Testimonials: only verified entries are shown ---------- */
   function initQuotes() {
     var sec = $('testimonials'), host = $('quotes'); if (!sec) return;
@@ -797,7 +904,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initQuotes(); initPortal(); initCount(); initReveal();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();

@@ -1,0 +1,108 @@
+{
+  "updated": "2026-10-09",
+  "note": "Add real events to items. Fields: id, type{en,fr}, title{en,fr}, desc{en,fr}, date (YYYY-MM-DD, optional), time (text, optional), recurrence{en,fr} (optional), place{en,fr}, status ('open' | 'soon' | 'recurring' | 'past'), cta{en,fr}.",
+  "items": [
+    {
+      "id": "club-webinars",
+      "type": {
+        "en": "Webinar",
+        "fr": "Webinaire"
+      },
+      "title": {
+        "en": "Business English Club live sessions",
+        "fr": "Sessions en direct du Club Business English"
+      },
+      "desc": {
+        "en": "Two live webinars every month for members, each on a business topic, with time for your questions.",
+        "fr": "Deux webinaires en direct chaque mois pour les membres, chacun sur un thème professionnel, avec du temps pour vos questions."
+      },
+      "recurrence": {
+        "en": "Twice a month",
+        "fr": "Deux fois par mois"
+      },
+      "place": {
+        "en": "Online",
+        "fr": "En ligne"
+      },
+      "status": "recurring",
+      "cta": {
+        "en": "Join the Club",
+        "fr": "Rejoindre le Club"
+      }
+    },
+    {
+      "id": "workshop-day",
+      "type": {
+        "en": "Workshop",
+        "fr": "Atelier"
+      },
+      "title": {
+        "en": "Windsor Workshop day",
+        "fr": "Journée d’atelier Windsor"
+      },
+      "desc": {
+        "en": "A 7-hour intensive on one skill: negotiation, presentations, writing, meetings or LinkedIn. Tell us your topic and we confirm the next date.",
+        "fr": "Un atelier intensif de 7 heures sur une compétence : négociation, présentations, rédaction, réunions ou LinkedIn. Indiquez votre thème et nous confirmons la prochaine date."
+      },
+      "time": "7 h",
+      "place": {
+        "en": "Abidjan or online",
+        "fr": "Abidjan ou en ligne"
+      },
+      "status": "soon",
+      "cta": {
+        "en": "Ask for the next date",
+        "fr": "Demander la prochaine date"
+      }
+    },
+    {
+      "id": "startups-cohort",
+      "type": {
+        "en": "Cohort",
+        "fr": "Cohorte"
+      },
+      "title": {
+        "en": "English for Startups: next cohort",
+        "fr": "Anglais pour startups : prochaine cohorte"
+      },
+      "desc": {
+        "en": "An 8-week cohort for founders, 4 hours a week, built around your pitch and investor questions.",
+        "fr": "Une cohorte de 8 semaines pour entrepreneurs, 4 heures par semaine, construite autour de votre pitch et des questions d’investisseurs."
+      },
+      "time": "8 × 4 h",
+      "place": {
+        "en": "Abidjan or online",
+        "fr": "Abidjan ou en ligne"
+      },
+      "status": "soon",
+      "cta": {
+        "en": "Join the waiting list",
+        "fr": "Rejoindre la liste d’attente"
+      }
+    },
+    {
+      "id": "in-house",
+      "type": {
+        "en": "At your company",
+        "fr": "Dans votre entreprise"
+      },
+      "title": {
+        "en": "Bring a workshop to your team",
+        "fr": "Un atelier dans vos locaux"
+      },
+      "desc": {
+        "en": "Any Windsor workshop can run at your offices for your own team, scheduled around your calendar.",
+        "fr": "Tout atelier Windsor peut se dérouler dans vos locaux pour votre propre équipe, selon votre calendrier."
+      },
+      "place": {
+        "en": "At your offices",
+        "fr": "Dans vos locaux"
+      },
+      "status": "soon",
+      "cta": {
+        "en": "Plan an event",
+        "fr": "Organiser un événement"
+      }
+    }
+  ]
+}
