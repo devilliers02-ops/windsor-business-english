@@ -321,6 +321,28 @@
     paint();
   }
 
+  /* ---------- CEFR levels explained ---------- */
+  function initCefr() {
+    var host = $('cefrGrid'); if (!host || !D.CEFR) return;
+    function paint() {
+      host.replaceChildren();
+      var groups = [], seen = {};
+      D.CEFR.forEach(function (c) { var k = c.grp.en; if (!seen[k]) { seen[k] = { grp: c.grp, items: [] }; groups.push(seen[k]); } seen[k].items.push(c); });
+      groups.forEach(function (g, gi) {
+        var col = el('div', 'cgroup g' + gi); col.appendChild(el('h3', null, t(g.grp)));
+        g.items.forEach(function (c) {
+          var card = el('article', 'clevel');
+          var top = el('div', 'ctop'); top.append(el('b', 'cbadge', c.lvl), el('span', null, t(c.name))); card.appendChild(top);
+          card.appendChild(el('p', 'cplain', t(c.plain)));
+          var w = el('p', 'cwork'); w.appendChild(el('b', null, t({ en: 'At work: ', fr: 'Au travail : ' }))); w.appendChild(document.createTextNode(t(c.work))); card.appendChild(w);
+          col.appendChild(card);
+        });
+        host.appendChild(col);
+      });
+    }
+    document.addEventListener('wbe:lang', paint); paint();
+  }
+
   /* ---------- Free level check ---------- */
   function initLevel() {
     var root = $('lvlQuiz'); if (!root) return;
@@ -358,6 +380,11 @@
         var b = band(), r = el('div', 'lres qres');
         r.appendChild(el('div', 'lv-big', b.lvl));
         r.appendChild(el('h3', null, t(b.name) + ' · ' + score + ' / ' + L.qs.length));
+        var cf = (D.CEFR || []).filter(function (x) { return x.lvl === b.lvl; })[0];
+        if (cf) {
+          r.appendChild(el('p', 'lgroup', t(cf.grp) + ' · CEFR ' + cf.lvl));
+          r.appendChild(el('p', 'lplain', t(cf.plain)));
+        }
         r.appendChild(el('p', 'ltime', (timedOut ? t({ en: 'Time is up! ', fr: 'Temps écoulé ! ' }) : t({ en: 'Time taken: ', fr: 'Temps utilisé : ' }) + fmt(elapsed) + ' · ') + t({ en: 'Answered ', fr: 'Répondu à ' }) + answered + ' / ' + L.qs.length));
         r.appendChild(el('p', null, t(b.msg)));
         var rec = el('div', 'rec'); rec.appendChild(el('b', null, t({ en: 'Suggested for you', fr: 'Conseillé pour vous' }))); rec.appendChild(document.createTextNode(t(b.prog))); r.appendChild(rec);
@@ -904,7 +931,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initQuotes(); initPortal(); initCount(); initReveal();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();

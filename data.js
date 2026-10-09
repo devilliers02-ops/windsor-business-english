@@ -168,6 +168,29 @@ window.WBE_DATA = (function () {
     ]
   };
 
+  /* CEFR levels, summarised in our own words from the Council of Europe global scale (Table 1).
+     The "work" lines are Windsor's own indicative reading and are not part of the CEFR. */
+  var CEFR = [
+    { lvl: 'A1', grp: bi('Basic User', 'Utilisateur élémentaire'), name: bi('Beginner', 'Découverte'),
+      plain: bi('You can use familiar everyday phrases, introduce yourself, and ask or answer simple questions about personal details, as long as the other person speaks slowly and clearly and is ready to help.', 'Vous utilisez des expressions familières du quotidien, vous vous présentez et vous posez ou répondez à des questions simples sur des détails personnels, si votre interlocuteur parle lentement, clairement et vous aide.'),
+      work: bi('Introduce yourself, read short notices and exchange basic details.', 'Vous présenter, lire de courts avis et échanger des informations de base.') },
+    { lvl: 'A2', grp: bi('Basic User', 'Utilisateur élémentaire'), name: bi('Elementary', 'Intermédiaire'),
+      plain: bi('You understand common expressions about everyday matters and manage simple, routine exchanges. You can describe your background and immediate needs in simple terms.', 'Vous comprenez des expressions courantes sur des sujets du quotidien et gérez des échanges simples et routiniers. Vous décrivez en termes simples votre parcours et vos besoins immédiats.'),
+      work: bi('Write short routine emails, follow simple instructions and handle brief phone exchanges.', 'Rédiger de courts e-mails de routine, suivre des consignes simples et gérer de brefs échanges téléphoniques.') },
+    { lvl: 'B1', grp: bi('Independent User', 'Utilisateur indépendant'), name: bi('Intermediate', 'Seuil'),
+      plain: bi('You follow the main points of clear, standard speech on familiar topics and cope with most situations when travelling. You can write simple connected text, describe experiences and plans, and briefly explain your opinions.', 'Vous suivez les points essentiels d’un langage clair et standard sur des sujets familiers et vous débrouillez dans la plupart des situations en voyage. Vous rédigez un texte simple et cohérent, décrivez des expériences et des projets et expliquez brièvement vos opinions.'),
+      work: bi('Take part in meetings on familiar topics, write clear emails and give a short update.', 'Participer à des réunions sur des sujets familiers, rédiger des e-mails clairs et faire un court point d’étape.') },
+    { lvl: 'B2', grp: bi('Independent User', 'Utilisateur indépendant'), name: bi('Upper intermediate', 'Avancé'),
+      plain: bi('You understand the main ideas of complex texts, including technical discussion in your own field. You can interact with enough fluency for regular conversation with native speakers to feel natural, write clear, detailed text, and explain a viewpoint with its advantages and disadvantages.', 'Vous comprenez les idées principales de textes complexes, y compris des discussions techniques dans votre domaine. Vous interagissez avec assez d’aisance pour que la conversation régulière avec des locuteurs natifs soit naturelle, rédigez un texte clair et détaillé et défendez un point de vue en exposant avantages et inconvénients.'),
+      work: bi('Lead routine meetings, negotiate in familiar situations, write reports and present with confidence.', 'Animer des réunions courantes, négocier dans des situations familières, rédiger des rapports et présenter avec assurance.') },
+    { lvl: 'C1', grp: bi('Proficient User', 'Utilisateur expérimenté'), name: bi('Advanced', 'Autonome'),
+      plain: bi('You understand demanding, longer texts and pick up implied meaning. You express yourself fluently and spontaneously, use the language flexibly for social, academic and professional purposes, and write clear, well-organised, detailed text on complex subjects.', 'Vous comprenez des textes longs et exigeants et percevez les sens implicites. Vous vous exprimez avec aisance et spontanéité, utilisez la langue avec souplesse à des fins sociales, académiques et professionnelles, et rédigez des textes clairs, bien organisés et détaillés sur des sujets complexes.'),
+      work: bi('Negotiate, present and write at senior level with precision and the right tone.', 'Négocier, présenter et rédiger au niveau de la direction avec précision et le bon ton.') },
+    { lvl: 'C2', grp: bi('Proficient User', 'Utilisateur expérimenté'), name: bi('Mastery', 'Maîtrise'),
+      plain: bi('You understand virtually everything you hear or read, summarise information from several sources, and express yourself very fluently and precisely, with fine shades of meaning even in complex situations.', 'Vous comprenez sans effort pratiquement tout ce que vous lisez ou entendez, résumez des informations de plusieurs sources et vous exprimez très couramment et avec précision, en nuançant le sens même dans des situations complexes.'),
+      work: bi('Near-native command. Rarely needed to do a role well.', 'Maîtrise proche de celle d’un natif. Rarement nécessaire pour bien exercer une fonction.') }
+  ];
+
   /* Real figures only. Leave a value at 0 and its tile stays hidden. Fill in once you can stand behind the number. */
   /* Social profiles. Paste each full profile address into `url` to switch that icon on.
      While `url` is empty the icon shows as "coming soon" and is not clickable. */
@@ -200,5 +223,5 @@ window.WBE_DATA = (function () {
 
   var PROOF = { learners: 0, companies: 0, hours: 0, sectors: 0 };
 
-  return { PHOTOS: PHOTOS, ANALYTICS: ANALYTICS, SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
+  return { CEFR: CEFR, PHOTOS: PHOTOS, ANALYTICS: ANALYTICS, SOCIAL: SOCIAL, PROOF: PROOF, SECTORS: SECTORS, LEVEL: LEVEL, PREP: PREP, QUIZ: QUIZ, KORO: KORO, PORTAL: PORTAL, TESTIMONIALS: TESTIMONIALS };
 })();

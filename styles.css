@@ -807,3 +807,24 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
 .exact{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 @media (max-width:1000px){.exsteps ol{grid-template-columns:1fr 1fr}.exgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.exsteps ol,.exgrid{grid-template-columns:1fr}.exact .btn{width:100%}}
+
+/* ---------- CEFR levels ---------- */
+.cefr{background:var(--paper)}
+.cefrgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.cgroup{display:grid;gap:14px;min-width:0}
+.cgroup>h3{font:700 .78rem var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);padding-bottom:8px;border-bottom:2px solid var(--gold)}
+.clevel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--sh)}
+.cgroup.g0 .clevel{border-top:4px solid #8FC3E8}
+.cgroup.g1 .clevel{border-top:4px solid var(--navy-2)}
+.cgroup.g2 .clevel{border-top:4px solid var(--gold)}
+.ctop{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.cbadge{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--navy);color:#fff;font:700 1.15rem var(--f-display)}
+.ctop span{font:700 1.02rem var(--f-display);color:var(--head)}
+.cplain{font-size:.92rem;color:var(--text);margin-bottom:12px}
+.cwork{font-size:.86rem;color:var(--muted);background:var(--paper);border-radius:var(--r-sm);padding:10px 12px}
+.cwork b{color:var(--gold-ink)}
+.cefrnote{text-align:center;font-size:.8rem;color:var(--muted);max-width:76ch;margin:26px auto 24px}
+.cefrnote a{color:var(--head);font-weight:700;text-underline-offset:3px}
+.lres .lgroup{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:6px}
+.lres .lplain{font-size:.9rem;max-width:56ch;margin-inline:auto}
+@media (max-width:1000px){.cefrgrid{grid-template-columns:1fr}.cgroup{gap:12px}}
