@@ -877,3 +877,5 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
 .vsteps li span{font-size:.9rem;color:var(--on-dark-mute)}
 @media (max-width:900px){.jlist{grid-template-columns:1fr}.vsteps ol{grid-template-columns:1fr}}
 @media (max-width:620px){.jfoot .row .btn,.vsteps .exact .btn{width:100%}}
+#programmesMenu{min-width:300px;max-height:calc(100vh - 110px);overflow-y:auto}
+@media (max-width:1240px){#programmesMenu{max-height:none}}

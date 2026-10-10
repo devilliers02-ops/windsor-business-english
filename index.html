@@ -36,7 +36,21 @@
     </a>
     <ul class="nav" id="nav">
       <li><a href="#about" data-fr="À propos">About</a></li>
-      <li><a href="#programmes" data-fr="Programmes">Programmes</a></li>
+      <li class="has-sub">
+        <button type="button" class="sub-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="programmesMenu"><span data-fr="Programmes">Programmes</span><i class="fas fa-chevron-down"></i></button>
+        <ul class="sub" id="programmesMenu">
+          <li><a href="#programmes"><i class="fas fa-table-cells-large"></i><span data-fr="Tous les programmes">All programmes</span></a></li>
+          <li><a href="#programmes" data-open-prog="corporate"><i class="fas fa-building"></i><span data-fr="Programme Windsor Corporate">Windsor Corporate Programme</span></a></li>
+          <li><a href="#programmes" data-open-prog="executive"><i class="fas fa-user-tie"></i><span data-fr="Coaching d’anglais pour dirigeants">Executive English Coaching</span></a></li>
+          <li><a href="#programmes" data-open-prog="certs"><i class="fas fa-certificate"></i><span data-fr="Certifications internationales">International certifications</span></a></li>
+          <li><a href="#programmes" data-open-prog="workshops"><i class="fas fa-bolt"></i><span data-fr="Ateliers Windsor">Windsor Workshops</span></a></li>
+          <li><a href="#programmes" data-open-prog="startups"><i class="fas fa-rocket"></i><span data-fr="Anglais pour startups">English for Startups</span></a></li>
+          <li><a href="#programmes" data-open-prog="b2b"><i class="fas fa-handshake"></i><span data-fr="Solutions entreprises B2B">B2B Corporate Solutions</span></a></li>
+          <li><a href="#programmes" data-open-prog="lms"><i class="fas fa-laptop"></i><span data-fr="LMS Windsor">Windsor LMS</span></a></li>
+          <li><a href="#programmes" data-open-prog="interview"><i class="fas fa-microphone"></i><span data-fr="Studio d’entretien simulé">Mock Interview Studio</span></a></li>
+          <li><a href="#programmes" data-open-prog="club"><i class="fas fa-users"></i><span data-fr="Club Business English">Business English Club</span></a></li>
+        </ul>
+      </li>
       <li><a href="#koro" data-fr="Windsor IA">Windsor AI</a></li>
       <li><a href="#practice" data-fr="Pratique">Practice</a></li>
       <li class="has-sub">

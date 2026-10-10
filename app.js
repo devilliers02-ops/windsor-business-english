@@ -93,7 +93,7 @@
 
     if (!('IntersectionObserver' in window)) return;
     var links = {};
-    $$('a[href^="#"]', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    $$('a[href^="#"]:not([data-open-prog])', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
     var spy = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (e.isIntersecting && links[e.target.id]) {
@@ -649,6 +649,12 @@
     grid.addEventListener('click', function (e) {
       var card = e.target.closest('[data-prog]'); if (!card) return;
       open(card.getAttribute('data-prog'), e.target.closest('button') || card.querySelector('button'));
+    });
+    document.addEventListener('click', function (e) {
+      var l = e.target.closest('[data-open-prog]'); if (!l) return;
+      e.preventDefault();
+      var sec = $('programmes'); if (sec) { var y = sec.getBoundingClientRect().top + window.scrollY - 70; window.scrollTo({ top: y, behavior: 'auto' }); }
+      open(l.getAttribute('data-open-prog'), l);
     });
     modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
     document.addEventListener('keydown', function (e) {
