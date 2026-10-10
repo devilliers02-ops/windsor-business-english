@@ -828,3 +828,52 @@ a.soc:hover{transform:translateY(-3px);background:var(--gold);color:var(--ink);b
 .lres .lgroup{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:6px}
 .lres .lplain{font-size:.9rem;max-width:56ch;margin-inline:auto}
 @media (max-width:1000px){.cefrgrid{grid-template-columns:1fr}.cgroup{gap:12px}}
+
+/* ---------- "Get engaged" dropdown ---------- */
+.has-sub{position:relative}
+.nav .sub-toggle{display:flex;align-items:center;gap:8px;padding:8px 11px;border:0;border-radius:999px;background:none;color:var(--on-dark);font:500 .9rem var(--f-body);cursor:pointer;white-space:nowrap;transition:color .2s,background .2s}
+.nav .sub-toggle:hover,.nav .sub-toggle.on,.has-sub.open>.sub-toggle{color:var(--gold-lt);background:rgba(201,162,77,.12)}
+.sub-toggle i,.sub-toggle svg{font-size:.7rem;width:.7em;transition:transform .25s var(--ease)}
+.has-sub.open>.sub-toggle i,.has-sub.open>.sub-toggle svg{transform:rotate(180deg)}
+.sub{list-style:none;position:absolute;top:calc(100% - 2px);left:50%;transform:translateX(-50%);min-width:230px;background:var(--band);border:1px solid rgba(201,162,77,.35);border-radius:var(--r);padding:8px;box-shadow:var(--sh-lg);display:none;z-index:120}
+.has-sub.open>.sub{display:block}
+@media (hover:hover) and (min-width:1241px){.has-sub:hover>.sub{display:block}}
+.nav .sub a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--r-sm);white-space:nowrap}
+.nav .sub a i,.nav .sub a svg{color:var(--gold-bright);width:18px;text-align:center}
+@media (max-width:1240px){
+  .nav .sub-toggle{width:100%;justify-content:space-between;padding:13px 14px;border-radius:var(--r-sm)}
+  .sub{position:static;transform:none;min-width:0;background:rgba(255,255,255,.05);border:0;box-shadow:none;margin:2px 0 6px 12px;padding:4px}
+}
+
+/* ---------- job vacancies and volunteer ---------- */
+.jobs{background:var(--sand)}
+.jlist{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.jlist .nempty{grid-column:1/-1}
+.jempty{grid-column:1/-1;text-align:center;background:var(--card);border:1px dashed var(--line);border-radius:var(--r-lg);padding:clamp(28px,5vw,48px);display:grid;gap:10px;justify-items:center}
+.jempty>i{font-size:2rem;color:var(--gold-ink)}
+.jempty h3{font:700 1.3rem var(--f-display);color:var(--head)}
+.jempty p{color:var(--muted);max-width:56ch}
+.jcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:10px;align-content:start;animation:in .45s var(--ease) both}
+.jtop{display:flex;flex-wrap:wrap;gap:8px}
+.jtype,.jloc{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:4px 12px}
+.jtype{background:var(--gold-soft);color:var(--gold-ink)}
+.jloc{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.jcard h3{font:700 1.2rem var(--f-display);color:var(--head)}
+.jcard p{font-size:.92rem;color:var(--muted)}
+.jcard .jdead{font-weight:600;color:var(--text)}
+.jcard .btn{justify-self:start}
+.jfoot{margin-top:30px;display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(22px,4vw,34px);box-shadow:var(--sh)}
+.jfoot h3{font:700 1.3rem var(--f-display);color:var(--head);margin-bottom:4px}
+.jfoot p{color:var(--muted);max-width:56ch}
+.jfoot .row{display:flex;flex-wrap:wrap;gap:12px}
+.jobs .paynote a{color:var(--head);font-weight:700;text-underline-offset:3px}
+.volunteer{background:var(--paper)}
+.vsteps{margin-top:clamp(32px,5vw,52px);background:linear-gradient(155deg,var(--band),var(--navy) 70%,var(--navy-2));color:var(--on-dark);border-radius:var(--r-lg);padding:clamp(24px,4vw,44px);box-shadow:var(--sh-lg)}
+.vsteps h3{font:700 1.5rem var(--f-display);color:#fff;margin-bottom:18px}
+.vsteps ol{list-style:none;counter-reset:v;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vsteps li{counter-increment:v;position:relative;padding-top:46px;min-width:0}
+.vsteps li::before{content:counter(v);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);font:700 .95rem var(--f-display);display:grid;place-items:center}
+.vsteps b{display:block;color:#fff;margin-bottom:4px}
+.vsteps li span{font-size:.9rem;color:var(--on-dark-mute)}
+@media (max-width:900px){.jlist{grid-template-columns:1fr}.vsteps ol{grid-template-columns:1fr}}
+@media (max-width:620px){.jfoot .row .btn,.vsteps .exact .btn{width:100%}}

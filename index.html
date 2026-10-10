@@ -37,11 +37,18 @@
     <ul class="nav" id="nav">
       <li><a href="#about" data-fr="À propos">About</a></li>
       <li><a href="#programmes" data-fr="Programmes">Programmes</a></li>
-      <li><a href="#events" data-fr="Événements">Events</a></li>
       <li><a href="#koro" data-fr="Windsor IA">Windsor AI</a></li>
       <li><a href="#practice" data-fr="Pratique">Practice</a></li>
-      <li><a href="#blog" data-fr="Blog">Blog</a></li>
-      <li><a href="#join" data-fr="Carrières">Join us</a></li>
+      <li class="has-sub">
+        <button type="button" class="sub-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="engageMenu"><span data-fr="S’engager">Get engaged</span><i class="fas fa-chevron-down"></i></button>
+        <ul class="sub" id="engageMenu">
+          <li><a href="#join"><i class="fas fa-user-plus"></i><span data-fr="Nous rejoindre">Join us</span></a></li>
+          <li><a href="#events"><i class="fas fa-calendar-days"></i><span data-fr="Événements">Events</span></a></li>
+          <li><a href="#blog"><i class="fas fa-newspaper"></i><span data-fr="Blog">Blog</span></a></li>
+          <li><a href="#volunteer"><i class="fas fa-hand-holding-heart"></i><span data-fr="Bénévolat">Volunteer</span></a></li>
+          <li><a href="#jobs"><i class="fas fa-briefcase"></i><span data-fr="Offres d’emploi">Job vacancies</span></a></li>
+        </ul>
+      </li>
       <li><a href="#contact" data-fr="Contact">Contact</a></li>
     </ul>
     <div class="hdr-tools">
@@ -178,7 +185,7 @@
     <div class="head center">
       <span class="eyebrow" data-fr="Nos programmes">Our programmes</span>
       <h2 class="h2" data-fr="9 programmes conçus pour <span class='g'>l’excellence professionnelle</span>" data-h>9 programmes built for <span class="g">professional excellence</span></h2>
-      <p class="lead" data-fr="Du coaching exécutif individuel aux solutions d’entreprise complètes, chaque programme repose sur des situations professionnelles réelles de la région UEMOA.">From one-to-one executive coaching to full corporate solutions, every programme is built on real business situations from the UEMOA region.</p>
+      <p class="lead" data-fr="Du coaching exécutif individuel aux solutions d’entreprise complètes, chaque programme repose sur des situations professionnelles réelles de la région et du monde entier.">From one-to-one executive coaching to full corporate solutions, every programme is built on real business situations from the region and worldwide.</p>
       <p class="hint"><i class="fas fa-hand-pointer"></i><span data-fr="Cliquez sur un programme pour voir le contenu détaillé et demander un devis.">Click any programme to see the full details and request a quote.</span></p>
     </div>
     <div class="grid3">
@@ -680,6 +687,76 @@
   </div>
 </section>
 
+<!-- ================= JOB VACANCIES ================= -->
+<section class="sec jobs" id="jobs">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Offres d’emploi">Job vacancies</span>
+      <h2 class="h2" data-fr="Les postes <span class='g'>ouverts chez Windsor</span>" data-h>Open roles <span class="g">at Windsor</span></h2>
+      <p class="lead" data-fr="Les postes à pourvoir apparaissent ici. Si aucun ne correspond à votre profil, écrivez-nous quand même : nous gardons les candidatures spontanées.">Open positions appear here. If none fits your profile, write to us anyway: we keep speculative applications on file.</p>
+    </div>
+    <div class="jlist" id="jobsList" aria-live="polite"><p class="nempty" data-fr="Chargement des offres…">Loading vacancies…</p></div>
+    <div class="jfoot" data-r>
+      <div><h3 data-fr="Candidature spontanée">Speculative application</h3><p data-fr="Envoyez-nous votre CV et le rôle qui vous intéresse. Nous vous contacterons quand un poste correspondant s’ouvrira.">Send us your CV and the role that interests you. We will contact you when a matching position opens.</p></div>
+      <div class="row">
+        <a class="btn btn-wa btn-lg" href="#jobs" data-wa="" data-msg-en="Hello Windsor, I would like to send a speculative application. The role that interests me is:" data-msg-fr="Bonjour Windsor, je souhaite envoyer une candidature spontanée. Le poste qui m’intéresse est :"><i class="fab fa-whatsapp"></i><span data-fr="Postuler sur WhatsApp">Apply on WhatsApp</span></a>
+        <a class="btn btn-line btn-lg" href="mailto:devilliers02@gmail.com?subject=Speculative%20application%20-%20Windsor%20Business%20English"><i class="fas fa-envelope"></i><span data-fr="Envoyer mon CV">Email my CV</span></a>
+      </div>
+    </div>
+    <p class="paynote"><a href="#join" data-fr="Voir où vous pourriez nous rejoindre">See where you could fit in</a></p>
+  </div>
+</section>
+
+<!-- ================= VOLUNTEER ================= -->
+<section class="sec volunteer" id="volunteer">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Bénévolat">Volunteer</span>
+      <h2 class="h2" data-fr="Offrez un peu de temps, <span class='g'>aidez une voix à se faire entendre</span>" data-h>Give a little time, <span class="g">help a voice be heard</span></h2>
+      <p class="lead" data-fr="Windsor accueille des bénévoles qui souhaitent aider des professionnels africains à gagner en assurance en anglais. Dites-nous comment vous aimeriez contribuer.">Windsor welcomes volunteers who want to help African professionals gain confidence in English. Tell us how you would like to contribute.</p>
+    </div>
+    <div class="roles-grid">
+      <article class="rcard" data-r>
+        <div class="ico"><i class="fas fa-comments"></i></div>
+        <span class="tagline" data-fr="Pratique orale">Speaking practice</span>
+        <h3 data-fr="Partenaire de conversation">Conversation partner</h3>
+        <p data-fr="Pratiquez l’anglais à l’oral avec des apprenants dans un cadre détendu, par petits groupes ou en tête-à-tête.">Practise spoken English with learners in a relaxed setting, in small groups or one to one.</p>
+        <a class="rlink" href="#volunteer" data-wa="" data-msg-en="Hello Windsor, I would like to volunteer as a conversation partner." data-msg-fr="Bonjour Windsor, je souhaite être bénévole comme partenaire de conversation."><span data-fr="Proposer mon aide">Offer to help</span><i class="fas fa-arrow-right arr"></i></a>
+      </article>
+      <article class="rcard" data-r>
+        <div class="ico"><i class="fas fa-user-group"></i></div>
+        <span class="tagline" data-fr="Orientation">Guidance</span>
+        <h3 data-fr="Mentor de carrière">Career mentor</h3>
+        <p data-fr="Partagez votre parcours professionnel lors d’un webinaire ou d’un échange, et conseillez des apprenants sur l’anglais au travail.">Share your career story in a webinar or a chat, and advise learners on English at work.</p>
+        <a class="rlink" href="#volunteer" data-wa="" data-msg-en="Hello Windsor, I would like to volunteer as a career mentor." data-msg-fr="Bonjour Windsor, je souhaite être bénévole comme mentor de carrière."><span data-fr="Proposer mon aide">Offer to help</span><i class="fas fa-arrow-right arr"></i></a>
+      </article>
+      <article class="rcard" data-r>
+        <div class="ico"><i class="fas fa-calendar-check"></i></div>
+        <span class="tagline" data-fr="Événements">Events</span>
+        <h3 data-fr="Soutien aux événements">Event helper</h3>
+        <p data-fr="Aidez à accueillir les participants, à installer la salle et à animer les ateliers et événements à Abidjan.">Help welcome participants, set up the room and run workshops and events in Abidjan.</p>
+        <a class="rlink" href="#volunteer" data-wa="" data-msg-en="Hello Windsor, I would like to volunteer as an event helper." data-msg-fr="Bonjour Windsor, je souhaite être bénévole pour aider lors des événements."><span data-fr="Proposer mon aide">Offer to help</span><i class="fas fa-arrow-right arr"></i></a>
+      </article>
+      <article class="rcard" data-r>
+        <div class="ico"><i class="fas fa-language"></i></div>
+        <span class="tagline" data-fr="Contenus">Content</span>
+        <h3 data-fr="Relecteur de contenus">Content reviewer</h3>
+        <p data-fr="Relisez des exercices et des traductions anglais-français pour que nos contenus restent clairs, justes et naturels.">Review exercises and English-French translations so our content stays clear, accurate and natural.</p>
+        <a class="rlink" href="#volunteer" data-wa="" data-msg-en="Hello Windsor, I would like to volunteer as a content reviewer." data-msg-fr="Bonjour Windsor, je souhaite être bénévole comme relecteur de contenus."><span data-fr="Proposer mon aide">Offer to help</span><i class="fas fa-arrow-right arr"></i></a>
+      </article>
+    </div>
+    <div class="vsteps" data-r>
+      <h3 data-fr="Comment ça se passe">How it works</h3>
+      <ol>
+        <li><b data-fr="Dites-nous ce qui vous intéresse">Tell us what interests you</b><span data-fr="Votre rôle préféré, vos disponibilités et un mot sur votre parcours.">Your preferred role, your availability and a few words about your background.</span></li>
+        <li><b data-fr="Échangeons">Let’s talk</b><span data-fr="Un court échange pour nous connaître et définir un engagement qui vous convient.">A short chat to get to know each other and agree a commitment that suits you.</span></li>
+        <li><b data-fr="Commencez à aider">Start helping</b><span data-fr="Nous vous présentons l’équipe et vous accompagnons pour vos premières séances.">We introduce you to the team and support you through your first sessions.</span></li>
+      </ol>
+      <div class="exact"><a class="btn btn-gold btn-lg" href="#volunteer" data-wa="" data-msg-en="Hello Windsor, I would like to volunteer. Here is a little about me and my availability:" data-msg-fr="Bonjour Windsor, je souhaite être bénévole. Voici une brève présentation et mes disponibilités :"><i class="fab fa-whatsapp"></i><span data-fr="Devenir bénévole">Become a volunteer</span></a></div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 <section class="sec dark cta">
   <div class="wrap">
@@ -736,6 +813,8 @@
         <li><a href="#practice" data-fr="Pratique gratuite">Free practice</a></li>
         <li><a href="#blog" data-fr="Blog">Blog</a></li>
         <li><a href="#join" data-fr="Rejoignez Windsor">Join Windsor</a></li>
+        <li><a href="#jobs" data-fr="Offres d’emploi">Job vacancies</a></li>
+        <li><a href="#volunteer" data-fr="Bénévolat">Volunteer</a></li>
         <li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4 data-fr="Informations légales">Legal</h4><ul>
         <li><a href="policies.html#privacy" data-fr="Confidentialité">Privacy policy</a></li>

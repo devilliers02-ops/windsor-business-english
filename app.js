@@ -77,8 +77,19 @@
     burger.addEventListener('click', function () {
       var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open));
     });
-    $$('a', nav).forEach(function (a) { a.addEventListener('click', close); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    $$('a', nav).forEach(function (a) { a.addEventListener('click', function () { close(); closeSubs(); }); });
+    function closeSubs(except) {
+      $$('.has-sub.open', nav).forEach(function (li) { if (li !== except) { li.classList.remove('open'); li.querySelector('.sub-toggle').setAttribute('aria-expanded', 'false'); } });
+    }
+    $$('.has-sub', nav).forEach(function (li) {
+      var btn = li.querySelector('.sub-toggle');
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation(); closeSubs(li);
+        var open = li.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open));
+      });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.has-sub')) closeSubs(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); closeSubs(); } });
 
     if (!('IntersectionObserver' in window)) return;
     var links = {};
@@ -88,6 +99,8 @@
         if (e.isIntersecting && links[e.target.id]) {
           Object.keys(links).forEach(function (k) { links[k].classList.remove('on'); });
           links[e.target.id].classList.add('on');
+          $$('.sub-toggle', nav).forEach(function (b) { b.classList.remove('on'); });
+          var par = links[e.target.id].closest('.has-sub'); if (par) par.querySelector('.sub-toggle').classList.add('on');
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
@@ -836,6 +849,42 @@
     else { failed = true; paint(); }
   }
 
+  /* ---------- Job vacancies (reads jobs.json) ---------- */
+  function initJobs() {
+    var host = $('jobsList'); if (!host) return;
+    var items = [], failed = false;
+    function waLink(j) {
+      var title = t(j.title);
+      var msg = WBE.lang() === 'fr' ? 'Bonjour Windsor, je souhaite postuler au poste : ' + title + '.' : 'Hello Windsor, I would like to apply for the position: ' + title + '.';
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+    function paint() {
+      host.replaceChildren();
+      if (failed) { host.appendChild(el('p', 'nempty', t({ en: 'Vacancies could not be loaded. Please refresh the page.', fr: 'Les offres n’ont pas pu être chargées. Actualisez la page.' }))); return; }
+      var today = new Date().toISOString().slice(0, 10);
+      var open = items.filter(function (j) { return !j.deadline || j.deadline >= today; });
+      if (!open.length) {
+        var e = el('div', 'jempty'); e.appendChild(el('i', 'far fa-folder-open'));
+        e.appendChild(el('h3', null, t({ en: 'No open vacancies right now', fr: 'Aucune offre ouverte pour le moment' })));
+        e.appendChild(el('p', null, t({ en: 'New roles are posted here first. Send a speculative application below and we will contact you when one opens.', fr: 'Les nouveaux postes sont publiés ici en premier. Envoyez une candidature spontanée ci-dessous et nous vous contacterons à l’ouverture d’un poste.' })));
+        host.appendChild(e); return;
+      }
+      open.forEach(function (j, i) {
+        var c = el('article', 'jcard'); c.style.animationDelay = (i * 70) + 'ms';
+        var top = el('div', 'jtop'); if (j.type) top.appendChild(el('span', 'jtype', t(j.type))); if (j.location) top.appendChild(el('span', 'jloc', t(j.location))); c.appendChild(top);
+        c.appendChild(el('h3', null, t(j.title))); if (j.desc) c.appendChild(el('p', null, t(j.desc)));
+        if (j.deadline) c.appendChild(el('p', 'jdead', t({ en: 'Apply by ', fr: 'Candidatures avant le ' }) + j.deadline));
+        var a = el('a', 'btn btn-gold btn-sm'); a.href = waLink(j); a.target = '_blank'; a.rel = 'noopener';
+        a.appendChild(el('i', 'fab fa-whatsapp')); a.appendChild(el('span', null, t({ en: 'Apply', fr: 'Postuler' }))); c.appendChild(a);
+        host.appendChild(c);
+      });
+    }
+    document.addEventListener('wbe:lang', paint);
+    if (window.fetch) fetch('jobs.json', { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function (j) { items = j.items || []; paint(); }).catch(function () { failed = true; paint(); });
+    else { failed = true; paint(); }
+  }
+
   /* ---------- Testimonials: only verified entries are shown ---------- */
   function initQuotes() {
     var sec = $('testimonials'), host = $('quotes'); if (!sec) return;
@@ -931,7 +980,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initJobs(); initQuotes(); initPortal(); initCount(); initReveal();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();

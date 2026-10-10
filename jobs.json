@@ -1,0 +1,5 @@
+{
+  "updated": "2026-10-10",
+  "note": "Add real vacancies to items. Fields: id, title{en,fr}, type{en,fr}, location{en,fr}, deadline (YYYY-MM-DD, optional), desc{en,fr}. Leave items empty when there are no open roles.",
+  "items": []
+}
