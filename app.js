@@ -653,8 +653,17 @@
     document.addEventListener('click', function (e) {
       var l = e.target.closest('[data-open-prog]'); if (!l) return;
       e.preventDefault();
-      var sec = $('programmes'); if (sec) { var y = sec.getBoundingClientRect().top + window.scrollY - 70; window.scrollTo({ top: y, behavior: 'auto' }); }
-      open(l.getAttribute('data-open-prog'), l);
+      var id = l.getAttribute('data-open-prog');
+      var target = document.querySelector('.card[data-prog="' + id + '"]') || $('programmes');
+      if (target) {
+        /* jump instantly (the page uses smooth scrolling, which the modal lock would cut short) so closing the panel leaves you at this programme */
+        var root = document.documentElement, prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+        var y = target.getBoundingClientRect().top + window.scrollY - Math.max(90, (window.innerHeight - target.offsetHeight) / 2);
+        window.scrollTo(0, Math.max(0, y));
+        root.style.scrollBehavior = prev;
+      }
+      open(id, l);
     });
     modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
     document.addEventListener('keydown', function (e) {
