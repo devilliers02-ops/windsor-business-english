@@ -864,13 +864,13 @@
     else { failed = true; paint(); }
   }
 
-  /* ---------- Job vacancies (reads jobs.json) ---------- */
+  /* ---------- Job vacancies from partner organisations (reads jobs.json) ---------- */
   function initJobs() {
     var host = $('jobsList'); if (!host) return;
     var items = [], failed = false;
     function waLink(j) {
-      var title = t(j.title);
-      var msg = WBE.lang() === 'fr' ? 'Bonjour Windsor, je souhaite postuler au poste : ' + title + '.' : 'Hello Windsor, I would like to apply for the position: ' + title + '.';
+      var title = t(j.title), org = j.partner ? (WBE.lang() === 'fr' ? ' chez ' : ' at ') + j.partner : '';
+      var msg = WBE.lang() === 'fr' ? 'Bonjour Windsor, je souhaite postuler au poste : ' + title + org + '.' : 'Hello Windsor, I would like to apply for the position: ' + title + org + '.';
       return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
     }
     function paint() {
@@ -879,18 +879,25 @@
       var today = new Date().toISOString().slice(0, 10);
       var open = items.filter(function (j) { return !j.deadline || j.deadline >= today; });
       if (!open.length) {
-        var e = el('div', 'jempty'); e.appendChild(el('i', 'far fa-folder-open'));
-        e.appendChild(el('h3', null, t({ en: 'No open vacancies right now', fr: 'Aucune offre ouverte pour le moment' })));
-        e.appendChild(el('p', null, t({ en: 'New roles are posted here first. Send a speculative application below and we will contact you when one opens.', fr: 'Les nouveaux postes sont publiés ici en premier. Envoyez une candidature spontanée ci-dessous et nous vous contacterons à l’ouverture d’un poste.' })));
+        var e = el('div', 'jempty'); e.appendChild(el('i', 'far fa-handshake'));
+        e.appendChild(el('h3', null, t({ en: 'No partner vacancies at the moment', fr: 'Aucune offre partenaire pour le moment' })));
+        e.appendChild(el('p', null, t({ en: 'New roles appear here as our partners’ HR departments send them to us. Leave your CV below and we will tell you when a role matches your profile.', fr: 'Les nouveaux postes apparaissent ici dès que les directions RH de nos partenaires nous les transmettent. Laissez votre CV ci-dessous et nous vous signalerons un poste qui vous correspond.' })));
         host.appendChild(e); return;
       }
       open.forEach(function (j, i) {
         var c = el('article', 'jcard'); c.style.animationDelay = (i * 70) + 'ms';
-        var top = el('div', 'jtop'); if (j.type) top.appendChild(el('span', 'jtype', t(j.type))); if (j.location) top.appendChild(el('span', 'jloc', t(j.location))); c.appendChild(top);
+        var top = el('div', 'jtop');
+        if (j.partner) { var pb = el('span', 'jpart'); pb.appendChild(el('i', 'fas fa-building')); pb.appendChild(document.createTextNode(' ' + j.partner)); top.appendChild(pb); }
+        if (j.type) top.appendChild(el('span', 'jtype', t(j.type)));
+        if (j.location) top.appendChild(el('span', 'jloc', t(j.location)));
+        if (j.level) top.appendChild(el('span', 'jlevel', t({ en: 'English ', fr: 'Anglais ' }) + j.level));
+        c.appendChild(top);
         c.appendChild(el('h3', null, t(j.title))); if (j.desc) c.appendChild(el('p', null, t(j.desc)));
         if (j.deadline) c.appendChild(el('p', 'jdead', t({ en: 'Apply by ', fr: 'Candidatures avant le ' }) + j.deadline));
-        var a = el('a', 'btn btn-gold btn-sm'); a.href = waLink(j); a.target = '_blank'; a.rel = 'noopener';
-        a.appendChild(el('i', 'fab fa-whatsapp')); a.appendChild(el('span', null, t({ en: 'Apply', fr: 'Postuler' }))); c.appendChild(a);
+        var a = el('a', 'btn btn-gold btn-sm'); a.target = '_blank'; a.rel = 'noopener noreferrer';
+        if (j.applyUrl) { a.href = j.applyUrl; a.appendChild(el('i', 'fas fa-arrow-up-right-from-square')); a.appendChild(el('span', null, t({ en: 'Apply on the employer’s site', fr: 'Postuler sur le site de l’employeur' }))); }
+        else { a.href = waLink(j); a.appendChild(el('i', 'fab fa-whatsapp')); a.appendChild(el('span', null, t({ en: 'Apply through Windsor', fr: 'Postuler via Windsor' }))); }
+        c.appendChild(a);
         host.appendChild(c);
       });
     }

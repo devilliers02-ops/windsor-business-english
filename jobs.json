@@ -1,5 +1,5 @@
 {
   "updated": "2026-10-10",
-  "note": "Add real vacancies to items. Fields: id, title{en,fr}, type{en,fr}, location{en,fr}, deadline (YYYY-MM-DD, optional), desc{en,fr}. Leave items empty when there are no open roles.",
+  "note": "Vacancies come from partner organisations' HR departments. Add each to items. Fields: id, partner (organisation name), title{en,fr}, type{en,fr}, location{en,fr}, level (CEFR level expected, e.g. B2), deadline (YYYY-MM-DD, optional), desc{en,fr}, applyUrl (optional: the employer's own application page; if empty, candidates apply through Windsor on WhatsApp). Leave items empty when there are no open roles.",
   "items": []
 }
