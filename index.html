@@ -200,11 +200,13 @@
       <span class="eyebrow" data-fr="Nos programmes">Our programmes</span>
       <h2 class="h2" data-fr="9 programmes conçus pour <span class='g'>l’excellence professionnelle</span>" data-h>9 programmes built for <span class="g">professional excellence</span></h2>
       <p class="lead" data-fr="Du coaching exécutif individuel aux solutions d’entreprise complètes, chaque programme repose sur des situations professionnelles réelles de la région et du monde entier.">From one-to-one executive coaching to full corporate solutions, every programme is built on real business situations from the region and worldwide.</p>
-      <p class="hint"><i class="fas fa-hand-pointer"></i><span data-fr="Cliquez sur un programme pour voir le contenu détaillé et demander un devis.">Click any programme to see the full details and request a quote.</span></p>
+      <p class="hint"><i class="fas fa-hand-pointer"></i><span data-fr="Filtrez selon votre besoin, ouvrez un aperçu rapide sur n’importe quelle carte, ou cliquez pour voir le programme détaillé et demander un devis.">Filter by what you need, open a quick look on any card, or click through for the full syllabus and a quote.</span></p>
     </div>
-    <div class="grid3">
-      <article class="card feat" data-r data-prog="corporate">
+    <div class="pfbar" id="progFilters" role="toolbar" aria-label="Filter programmes" data-fr-aria="Filtrer les programmes"></div>
+    <div class="grid3 progs-grid">
+      <article class="card feat" data-r data-prog="corporate" data-cat="orgs">
         <span class="pill" data-fr="Programme phare">Flagship</span>
+        <figure class="photo feat-photo" data-photo="progfeat"></figure>
         <div class="ico"><i class="fas fa-building"></i></div>
         <h3 data-fr="Programme Windsor Corporate">Windsor Corporate Programme</h3>
         <p data-fr="Formation hybride pour cadres et employés : en présentiel, sur Zoom et sur le LMS, pour des groupes de 8 à 12 apprenants.">Hybrid training for managers and employees: face to face, on Zoom and on the LMS, for groups of 8 to 12 learners.</p>
@@ -212,7 +214,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="Formats de 20 h ou 40 h">20 h or 40 h formats</span></li><li><i class="fas fa-check"></i><span data-fr="Programme aligné sur le CECRL">CEFR-aligned curriculum</span></li><li><i class="fas fa-check"></i><span data-fr="Accès au LMS inclus">LMS access included</span></li></ul>
         <button type="button" class="btn btn-gold btn-sm" data-prog="corporate" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="executive">
+      <article class="card" data-r data-prog="executive" data-cat="pros">
         <div class="ico"><i class="fas fa-user-tie"></i></div>
         <h3 data-fr="Coaching d’anglais pour dirigeants">Executive English Coaching</h3>
         <p data-fr="Coaching individuel pour dirigeants, DRH et cadres supérieurs, adapté à votre secteur et à vos objectifs.">One-to-one coaching for C-level executives, HR directors and senior managers, tailored to your industry and goals.</p>
@@ -220,7 +222,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="10, 20 ou 30 séances">10, 20 or 30 sessions</span></li><li><i class="fas fa-check"></i><span data-fr="Coachs expérimentés auprès des dirigeants">Coaches experienced with executives</span></li><li><i class="fas fa-check"></i><span data-fr="Horaires flexibles">Flexible scheduling</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="executive" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="certs">
+      <article class="card" data-r data-prog="certs" data-cat="careers">
         <div class="ico"><i class="fas fa-certificate"></i></div>
         <h3 data-fr="Certifications internationales">International certifications</h3>
         <p data-fr="Préparation intensive de 30 h au TOEIC, au TOEFL iBT et à Linguaskill Business.">Intensive 30-hour preparation for TOEIC, TOEFL iBT and Linguaskill Business.</p>
@@ -228,7 +230,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="Examens blancs inclus">Mock tests included</span></li><li><i class="fas fa-check"></i><span>TOEIC, TOEFL, Linguaskill</span></li><li><i class="fas fa-check"></i><span data-fr="Supports inclus">Materials included</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="certs" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="workshops">
+      <article class="card" data-r data-prog="workshops" data-cat="orgs pros">
         <div class="ico"><i class="fas fa-bolt"></i></div>
         <h3 data-fr="Ateliers Windsor">Windsor Workshops</h3>
         <p data-fr="Modules intensifs d’une journée (7 h) sur une compétence : négociation, présentations, rédaction, réunions.">Intensive one-day (7-hour) modules on one skill: negotiation, presentations, writing, meetings.</p>
@@ -236,7 +238,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="5 modules spécialisés">5 specialist modules</span></li><li><i class="fas fa-check"></i><span data-fr="Application immédiate">Immediate application</span></li><li><i class="fas fa-check"></i><span data-fr="Attestation de participation">Certificate of completion</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="workshops" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="startups">
+      <article class="card" data-r data-prog="startups" data-cat="pros">
         <div class="ico"><i class="fas fa-rocket"></i></div>
         <h3 data-fr="Anglais pour startups">English for Startups</h3>
         <p data-fr="Une cohorte de 8 semaines pour entrepreneurs : pitch decks, questions d’investisseurs et réseautage international.">An 8-week cohort for founders: pitch decks, investor Q&amp;A and international networking.</p>
@@ -244,7 +246,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="4 h par semaine">4 h per week</span></li><li><i class="fas fa-check"></i><span data-fr="Entraînement au pitch deck">Pitch deck practice</span></li><li><i class="fas fa-check"></i><span data-fr="Anglais pour investisseurs">Investor English</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="startups" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="b2b">
+      <article class="card" data-r data-prog="b2b" data-cat="orgs">
         <div class="ico"><i class="fas fa-handshake"></i></div>
         <h3 data-fr="Solutions entreprises B2B">B2B Corporate Solutions</h3>
         <p data-fr="Formation sur mesure en entreprise pour des équipes de 10 personnes, avec audit linguistique gratuit et reporting RH mensuel.">Custom in-company training for teams of 10, with a free language audit and monthly HR reporting.</p>
@@ -252,7 +254,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="Contenus sur mesure">Custom content</span></li><li><i class="fas fa-check"></i><span data-fr="Audit linguistique gratuit">Free language audit</span></li><li><i class="fas fa-check"></i><span data-fr="Rapports de progression RH">HR progress reports</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="b2b" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="lms">
+      <article class="card" data-r data-prog="lms" data-cat="community">
         <div class="ico"><i class="fas fa-laptop"></i></div>
         <h3>Windsor LMS</h3>
         <p data-fr="Notre plateforme d’apprentissage numérique, incluse dans chaque programme.">Our digital learning platform, included in every programme.</p>
@@ -260,7 +262,7 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="Recommandations par IA">AI recommendations</span></li><li><i class="fas fa-check"></i><span data-fr="Parcours guidés">Guided learning paths</span></li><li><i class="fas fa-check"></i><span data-fr="Suivi de progression">Progress tracking</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="lms" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="interview">
+      <article class="card" data-r data-prog="interview" data-cat="careers">
         <div class="ico"><i class="fas fa-microphone"></i></div>
         <h3 data-fr="Studio d’entretien simulé">Mock Interview Studio</h3>
         <p data-fr="Trois entretiens simulés avec retour vidéo et rapport d’amélioration écrit pour les candidats.">Three simulated interviews with video feedback and a written improvement report for job candidates.</p>
@@ -268,13 +270,22 @@
         <ul><li><i class="fas fa-check"></i><span data-fr="Enregistrement vidéo">Video recording</span></li><li><i class="fas fa-check"></i><span data-fr="Retour d’un expert">Expert feedback</span></li><li><i class="fas fa-check"></i><span data-fr="Rapport écrit">Written report</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="interview" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
       </article>
-      <article class="card" data-r data-prog="club">
+      <article class="card" data-r data-prog="club" data-cat="community">
         <div class="ico"><i class="fas fa-users"></i></div>
         <h3 data-fr="Club Business English">Business English Club</h3>
         <p data-fr="Abonnement mensuel pour les anciens apprenants : deux webinaires par mois, un groupe WhatsApp réservé et la newsletter Windsor Dispatch.">Monthly membership for alumni: two webinars a month, a members' WhatsApp group and the Windsor Dispatch newsletter.</p>
         <div class="price"><i class="fas fa-tag"></i><span data-fr="Tarif sur demande">Price on request</span></div>
         <ul><li><i class="fas fa-check"></i><span data-fr="Deux webinaires par mois">Two webinars a month</span></li><li><i class="fas fa-check"></i><span data-fr="Communauté de membres">Members' community</span></li><li><i class="fas fa-check"></i><span>Windsor Dispatch</span></li></ul>
         <button type="button" class="btn btn-line btn-sm" data-prog="club" aria-haspopup="dialog"><span data-fr="Voir les détails">View details</span><i class="fas fa-arrow-right arr"></i></button>
+      </article>
+      <article class="card ctacard" data-r>
+        <div class="ico"><i class="fas fa-compass"></i></div>
+        <h3 data-fr="Vous ne savez pas par où commencer ?">Not sure where to start?</h3>
+        <p data-fr="Faites le test de niveau gratuit, environ 3 minutes. Nous vous suggérons le programme qui vous convient.">Take the free level check, about 3 minutes, and we will suggest the programme that fits you.</p>
+        <div class="ctarow">
+          <a class="btn btn-gold btn-sm" href="#level"><span data-fr="Faire le test de niveau">Take the level check</span><i class="fas fa-arrow-right arr"></i></a>
+          <a class="btn btn-line btn-sm" href="#contact" data-wa="Help me choose a programme"><i class="fab fa-whatsapp"></i><span data-fr="Demander conseil">Ask us on WhatsApp</span></a>
+        </div>
       </article>
     </div>
   </div>

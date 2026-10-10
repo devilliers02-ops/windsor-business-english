@@ -900,6 +900,85 @@
     else { failed = true; paint(); }
   }
 
+  /* ---------- Programmes: filters, category tags and an in-place "quick look" on every card ---------- */
+  function initProgGrid() {
+    var grid = document.querySelector('#programmes .progs-grid'), bar = $('progFilters');
+    if (!grid || !bar || !D.PROGRAMMES) return;
+    var FILTERS = [
+      { id: 'all', label: { en: 'All programmes', fr: 'Tous les programmes' } },
+      { id: 'orgs', label: { en: 'For organisations', fr: 'Pour les organisations' } },
+      { id: 'pros', label: { en: 'For professionals', fr: 'Pour les professionnels' } },
+      { id: 'careers', label: { en: 'Exams and careers', fr: 'Examens et carrière' } },
+      { id: 'community', label: { en: 'Community and tools', fr: 'Communauté et outils' } }
+    ];
+    var state = { filter: 'all', open: {} };
+    function cards() { return $$('.card[data-prog]', grid); }
+    function prog(id) { return D.PROGRAMMES.filter(function (p) { return p.id === id; })[0]; }
+    function label(id) { return FILTERS.filter(function (f) { return f.id === id; })[0].label; }
+    function count(f) { return cards().filter(function (c) { return f === 'all' || (c.getAttribute('data-cat') || '').split(' ').indexOf(f) > -1; }).length; }
+    function bullets(items) { var u = el('ul'); items.forEach(function (x) { var li = el('li'); li.appendChild(el('i', 'fas fa-check')); li.appendChild(el('span', null, t(x))); u.appendChild(li); }); return u; }
+
+    function decorate() {
+      cards().forEach(function (c) {
+        $$('.ctag, .qwrap', c).forEach(function (n) { n.remove(); });
+        var id = c.getAttribute('data-prog'), P = prog(id); if (!P) return;
+        var cat = (c.getAttribute('data-cat') || '').split(' ')[0];
+        var tag = el('span', 'ctag', t(label(cat))), h3 = c.querySelector('h3'); c.insertBefore(tag, h3);
+        var wrap = el('div', 'qwrap'), open = !!state.open[id], pid = 'ql-' + id;
+        var tg = el('button', 'qtoggle'); tg.type = 'button'; tg.setAttribute('aria-expanded', String(open)); tg.setAttribute('aria-controls', pid);
+        tg.appendChild(el('span', null, open ? t({ en: 'Hide quick look', fr: 'Masquer l’aperçu' }) : t({ en: 'Quick look', fr: 'Aperçu rapide' }))); tg.appendChild(el('i', 'fas fa-chevron-down'));
+        tg.addEventListener('click', function (e) { e.stopPropagation(); state.open[id] = !state.open[id]; decorate(); syncExpandAll(); });
+        var panel = el('div', 'qpanel' + (open ? ' open' : '')); panel.id = pid;
+        var inner = el('div', 'qin');
+        var chips = el('div', 'qchips'); P.facts.forEach(function (f) { var s = el('span'); s.appendChild(el('b', null, t(f.k))); s.appendChild(document.createTextNode(' ' + t(f.v))); chips.appendChild(s); });
+        inner.appendChild(chips);
+        var cols = el('div', 'qcols');
+        var c1 = el('div'); c1.appendChild(el('h4', null, t({ en: 'Who it is for', fr: 'À qui il s’adresse' }))); c1.appendChild(bullets(P.who));
+        var c2 = el('div'); c2.appendChild(el('h4', null, t({ en: 'You will achieve', fr: 'Vous atteindrez' }))); c2.appendChild(bullets(P.outcomes));
+        cols.append(c1, c2); inner.appendChild(cols);
+        var more = el('button', 'btn btn-gold btn-sm qmore'); more.type = 'button'; more.setAttribute('data-prog', id); more.setAttribute('aria-haspopup', 'dialog');
+        more.appendChild(el('span', null, t({ en: 'Full syllabus and quote', fr: 'Programme détaillé et devis' }))); more.appendChild(el('i', 'fas fa-arrow-right arr'));
+        inner.appendChild(more); panel.appendChild(inner);
+        wrap.append(tg, panel);
+        var cta = c.querySelector(':scope > .btn'); c.insertBefore(wrap, cta);
+        if (!open) { panel.setAttribute('inert', ''); }
+      });
+    }
+    function apply() {
+      cards().forEach(function (c) {
+        var show = state.filter === 'all' || (c.getAttribute('data-cat') || '').split(' ').indexOf(state.filter) > -1;
+        c.hidden = !show;
+      });
+      grid.classList.toggle('filtered', state.filter !== 'all');
+    }
+    function syncExpandAll() {
+      var vis = cards().filter(function (c) { return !c.hidden; });
+      var all = vis.length && vis.every(function (c) { return state.open[c.getAttribute('data-prog')]; });
+      var b = $('progExpandAll'); if (b) { b.setAttribute('aria-pressed', String(!!all)); b.querySelector('span').textContent = all ? t({ en: 'Collapse all', fr: 'Tout replier' }) : t({ en: 'Expand all', fr: 'Tout déplier' }); }
+    }
+    function buildBar() {
+      bar.replaceChildren();
+      var left = el('div', 'pfl');
+      FILTERS.forEach(function (f) {
+        var b = el('button', 'pf'); b.type = 'button'; b.setAttribute('aria-pressed', String(state.filter === f.id));
+        b.appendChild(el('span', null, t(f.label))); b.appendChild(el('em', null, String(count(f.id))));
+        b.onclick = function () { state.filter = f.id; apply(); buildBar(); syncExpandAll(); };
+        left.appendChild(b);
+      });
+      var ex = el('button', 'pexp'); ex.type = 'button'; ex.id = 'progExpandAll'; ex.appendChild(el('span', null, t({ en: 'Expand all', fr: 'Tout déplier' }))); ex.appendChild(el('i', 'fas fa-up-down'));
+      ex.onclick = function () {
+        var vis = cards().filter(function (c) { return !c.hidden; });
+        var all = vis.every(function (c) { return state.open[c.getAttribute('data-prog')]; });
+        vis.forEach(function (c) { state.open[c.getAttribute('data-prog')] = !all; });
+        decorate(); syncExpandAll();
+      };
+      bar.append(left, ex);
+    }
+    function paint() { decorate(); apply(); buildBar(); syncExpandAll(); }
+    document.addEventListener('wbe:lang', paint);
+    paint();
+  }
+
   /* ---------- Testimonials: only verified entries are shown ---------- */
   function initQuotes() {
     var sec = $('testimonials'), host = $('quotes'); if (!sec) return;
@@ -995,7 +1074,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initJobs(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initProgGrid(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initJobs(); initQuotes(); initPortal(); initCount(); initReveal();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();
