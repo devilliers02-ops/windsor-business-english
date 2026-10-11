@@ -51,8 +51,17 @@
           <li><a href="#programmes" data-open-prog="club"><i class="fas fa-users"></i><span data-fr="Club Business English">Business English Club</span></a></li>
         </ul>
       </li>
-      <li><a href="#koro" data-fr="Windsor IA">Windsor AI</a></li>
-      <li><a href="#practice" data-fr="Pratique">Practice</a></li>
+      <li class="has-sub">
+        <button type="button" class="sub-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="learnMenu"><span data-fr="Apprendre">Learn</span><i class="fas fa-chevron-down"></i></button>
+        <ul class="sub" id="learnMenu">
+          <li><a href="#koro"><i class="fas fa-robot"></i><span data-fr="Windsor IA, tuteur">Windsor AI tutor</span></a></li>
+          <li><a href="#practice"><i class="fas fa-dumbbell"></i><span data-fr="Pratique gratuite">Free practice</span></a></li>
+          <li><a href="#level"><i class="fas fa-gauge-high"></i><span data-fr="Test de niveau gratuit">Free level check</span></a></li>
+          <li><a href="#cefr"><i class="fas fa-stairs"></i><span data-fr="Niveaux CECRL">CEFR levels</span></a></li>
+          <li><a href="#exams"><i class="fas fa-file-signature"></i><span data-fr="Passer votre examen">Take your exam</span></a></li>
+          <li><a href="#portal"><i class="fas fa-user-graduate"></i><span data-fr="Espace apprenant">Learner portal</span></a></li>
+        </ul>
+      </li>
       <li class="has-sub">
         <button type="button" class="sub-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="engageMenu"><span data-fr="S’engager">Get engaged</span><i class="fas fa-chevron-down"></i></button>
         <ul class="sub" id="engageMenu">
@@ -81,7 +90,10 @@
   <div class="bar" id="bar"></div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
+<div class="pnav" id="pnav" hidden></div>
+
+<div class="page" id="page-home" data-page="home" hidden>
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
   <div class="wrap hero-grid">
@@ -131,8 +143,60 @@
   <span data-fr="Négociation">Negotiation</span><span data-fr="Présentations">Presentations</span><span data-fr="E-mails professionnels">Professional emails</span><span data-fr="Réunions">Meetings</span><span>TOEIC &amp; TOEFL</span><span data-fr="Pitch devant des investisseurs">Pitching to investors</span><span data-fr="Entretiens d’embauche">Job interviews</span><span>LinkedIn</span><span data-fr="Coaching exécutif">Executive coaching</span><span>Linguaskill</span>
 </div></div>
 
+<!-- ================= EXPLORE HUB ================= -->
+<section class="sec hub" id="explore">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Explorer">Explore</span>
+      <h2 class="h2" data-fr="Tout Windsor, <span class='g'>une page à la fois</span>" data-h>All of Windsor, <span class="g">one page at a time</span></h2>
+      <p class="lead" data-fr="Choisissez ce qui vous intéresse. Chaque page est courte et va droit au but.">Pick what matters to you. Every page is short and gets straight to the point.</p>
+    </div>
+    <div class="hubgrid">
+      <a class="hubcard" href="#programmes" data-r><span class="hico"><i class="fas fa-layer-group"></i></span><h3 data-fr="9 programmes">9 programmes</h3><p data-fr="Corporate, coaching de dirigeants, certifications, ateliers, startups et plus.">Corporate, executive coaching, certifications, workshops, startups and more.</p><span class="hgo"><span data-fr="Voir les programmes">See programmes</span><i class="fas fa-arrow-right"></i></span></a>
+      <a class="hubcard" href="#level" data-r><span class="hico"><i class="fas fa-gauge-high"></i></span><h3 data-fr="Test de niveau gratuit">Free level check</h3><p data-fr="Environ 3 minutes pour connaître votre niveau CECRL et le programme qui vous convient.">About 3 minutes to learn your CEFR level and the programme that fits you.</p><span class="hgo"><span data-fr="Commencer le test">Start the check</span><i class="fas fa-arrow-right"></i></span></a>
+      <a class="hubcard" href="#koro" data-r><span class="hico"><i class="fas fa-robot"></i></span><h3 data-fr="Apprendre avec Windsor">Learn with Windsor</h3><p data-fr="Le tuteur IA, la pratique gratuite, les niveaux CECRL et la préparation aux examens.">The AI tutor, free practice, CEFR levels and exam preparation.</p><span class="hgo"><span data-fr="Commencer à apprendre">Start learning</span><i class="fas fa-arrow-right"></i></span></a>
+      <a class="hubcard" href="#about" data-r><span class="hico"><i class="fas fa-building-columns"></i></span><h3 data-fr="Qui nous sommes">Who we are</h3><p data-fr="Notre approche, le déroulé d’un programme, les secteurs servis et les avis des apprenants.">Our approach, how a programme works, the sectors we serve and learner feedback.</p><span class="hgo"><span data-fr="Découvrir Windsor">Meet Windsor</span><i class="fas fa-arrow-right"></i></span></a>
+      <a class="hubcard" href="#events" data-r><span class="hico"><i class="fas fa-people-group"></i></span><h3 data-fr="S’engager">Get engaged</h3><p data-fr="Événements, brief quotidien, offres de nos partenaires, bénévolat et rejoindre l’équipe.">Events, the daily brief, partner vacancies, volunteering and joining the team.</p><span class="hgo"><span data-fr="Voir les opportunités">See opportunities</span><i class="fas fa-arrow-right"></i></span></a>
+      <a class="hubcard" href="#contact" data-r><span class="hico"><i class="fas fa-comments"></i></span><h3 data-fr="Parlons-en">Talk to us</h3><p data-fr="Réservez une consultation gratuite, écrivez-nous sur WhatsApp ou lisez la FAQ.">Book a free consultation, message us on WhatsApp or read the FAQ.</p><span class="hgo"><span data-fr="Nous contacter">Contact us</span><i class="fas fa-arrow-right"></i></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROMISE & PROOF ================= -->
+<section class="sec promise" id="promise">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Nos engagements">Our commitments</span>
+      <h2 class="h2" data-fr="Des résultats <span class='g'>que vous pouvez nous demander</span>" data-h>Results <span class="g">you can hold us to</span></h2>
+      <p class="lead" data-fr="Nous préférons des engagements mesurables à de grandes promesses.">We prefer measurable commitments to big promises.</p>
+    </div>
+    <div class="proof" id="proofRow"></div>
+    <div class="commit">
+      <article data-r><i class="fas fa-clipboard-check"></i><h3 data-fr="Un point de départ mesuré">A measured starting point</h3><p data-fr="Chaque apprenant passe un test de niveau gratuit avant de commencer, pour que nous partions du bon niveau CECRL.">Every learner takes a free level check before starting, so we begin at the right CEFR level.</p></article>
+      <article data-r><i class="fas fa-chart-line"></i><h3 data-fr="Une progression que l’on voit">Progress you can see</h3><p data-fr="Nous mesurons à nouveau votre niveau à la fin du programme pour comparer avec le point de départ.">We measure your level again at the end of the programme and compare it with where you started.</p></article>
+      <article data-r><i class="fas fa-file-lines"></i><h3 data-fr="Des rapports clairs pour les équipes">Clear reports for teams</h3><p data-fr="Les entreprises reçoivent un rapport mensuel sur la présence, la pratique et la progression.">Companies receive a monthly report on attendance, practice and progress.</p></article>
+      <article data-r><i class="fas fa-comments"></i><h3 data-fr="Un retour honnête">Honest feedback</h3><p data-fr="Vos coachs vous disent précisément ce qu’il faut améliorer, et vous pouvez nous dire ce que nous devons améliorer.">Your coaches tell you exactly what to improve, and you can tell us what we should improve.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="sec dark cta">
+  <div class="wrap">
+    <h2 class="h2" data-fr="Prêt à vous exprimer avec plus d’autorité ?">Ready to speak with more authority?</h2>
+    <p class="lead" data-fr="Dites-nous quel est votre poste et votre objectif. Nous vous répondrons avec un test de niveau et le programme adapté.">Tell us your role and your goal. We will reply with a level check and the right programme.</p>
+    <div class="cta-btns">
+      <a class="btn btn-wa btn-lg" href="#contact" data-wa=""><i class="fab fa-whatsapp"></i><span data-fr="Écrivez-nous sur WhatsApp">Message us on WhatsApp</span></a>
+      <a class="btn btn-line btn-lg" href="#programmes"><span data-fr="Voir les programmes">Browse programmes</span><i class="fas fa-arrow-right arr"></i></a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="page" id="page-about" data-page="about" hidden>
 <!-- ================= ABOUT ================= -->
-<section class="sec" id="about">
+<section class="sec" id="about" data-view>
   <div class="wrap">
     <div class="about-top">
       <div data-r>
@@ -193,8 +257,61 @@
   </div>
 </section>
 
+<!-- ================= HOW IT WORKS ================= -->
+<section class="sec how" id="how" data-view>
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-fr="Comment ça marche">How it works</span>
+      <h2 class="h2" data-fr="Du premier échange à des <span class='g'>résultats mesurables</span>" data-h>From first message to <span class="g">measurable results</span></h2>
+    </div>
+    <div class="hows">
+      <div data-r><small data-fr="Étape 1">Step 1</small><h3 data-fr="Consultation gratuite et test de niveau">Free consultation and level check</h3><p data-fr="Nous confrontons votre poste, votre secteur et votre niveau CECRL à l’anglais que votre carrière exige.">We match your role, sector and CEFR level to the English your career demands.</p></div>
+      <div data-r><small data-fr="Étape 2">Step 2</small><h3 data-fr="Un parcours bâti autour de votre métier">A track built around your work</h3><p data-fr="Du coaching en direct, avec de vrais e-mails, réunions et présentations de votre secteur.">Live coaching with real emails, meetings and presentations from your own industry.</p></div>
+      <div data-r><small data-fr="Étape 3">Step 3</small><h3 data-fr="Pratiquez chaque jour avec Windsor">Practise daily with Windsor</h3><p data-fr="Connectez-vous au portail pour des exercices rapides et un retour immédiat, à toute heure.">Sign in to the portal for quick exercises and instant feedback, any time.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTORS ================= -->
+<section class="sec" id="sectors" data-view>
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Par secteur">By sector</span>
+      <h2 class="h2" data-fr="L’anglais que parle <span class='g'>votre métier</span>" data-h>The English your <span class="g">industry speaks</span></h2>
+      <p class="lead" data-fr="Les cours Windsor utilisent le vocabulaire et les situations de votre secteur. Voici un aperçu de ce que vous pratiquerez.">Windsor lessons use the vocabulary and situations of your sector. Here is a taste of what you will practise.</p>
+    </div>
+    <div class="tabs stabs" id="secTabs" role="tablist" aria-label="Sectors" data-fr-aria="Secteurs"></div>
+    <div class="phgrid" id="secCards" aria-live="polite"></div>
+    <div class="center-cta"><a class="btn btn-navy btn-lg" href="#contact" data-wa="English for my sector"><i class="fab fa-whatsapp"></i><span data-fr="Demander un programme pour mon secteur">Ask for a programme for my sector</span></a></div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS & FEEDBACK ================= -->
+<section class="sec" id="testimonials" data-view>
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow" data-fr="Témoignages">Success stories</span><h2 class="h2" data-fr="Ce que disent <span class='g'>nos apprenants</span>" data-h>What our <span class="g">learners say</span></h2></div>
+    <div class="quotes" id="quotes"></div>
+    <div class="fbbox" data-r>
+      <div class="fbintro">
+        <span class="eyebrow" data-fr="Votre avis compte">Your voice matters</span>
+        <h3 data-fr="Partagez votre expérience avec Windsor">Share your experience with Windsor</h3>
+        <p data-fr="Votre retour nous aide à nous améliorer et aide d’autres professionnels à choisir. Avec votre accord, nous pourrons le publier ici.">Your feedback helps us improve and helps other professionals choose. With your permission, we may publish it here.</p>
+        <ul>
+          <li><i class="fas fa-star"></i><span data-fr="Notez votre expérience de 1 à 5">Rate your experience from 1 to 5</span></li>
+          <li><i class="fas fa-briefcase"></i><span data-fr="Dites-nous ce qui a changé au travail">Tell us what changed at work</span></li>
+          <li><i class="fas fa-lock"></i><span data-fr="Rien n’est publié sans votre accord">Nothing is published without your consent</span></li>
+        </ul>
+      </div>
+      <div class="fbhost" id="fbHost"></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="page" id="page-programmes" data-page="programmes" hidden>
 <!-- ================= PROGRAMMES ================= -->
-<section class="sec programmes" id="programmes">
+<section class="sec programmes" id="programmes" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Nos programmes">Our programmes</span>
@@ -291,8 +408,59 @@
   </div>
 </section>
 
+<!-- ================= WORKSHOPS ================= -->
+<section class="sec" id="workshops" data-view>
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Ateliers Windsor">Windsor Workshops</span>
+      <h2 class="h2" data-fr="Des modules intensifs <span class='g'>d’une journée</span>" data-h>Intensive one-day <span class="g">skill modules</span></h2>
+      <p class="lead" data-fr="Chaque atelier est une immersion de 7 heures dans une compétence clé de la communication professionnelle.">Each workshop is a 7-hour deep dive into one key business communication skill.</p>
+    </div>
+    <div class="ws">
+      <div class="w" data-r><code>WW-01</code><i class="fas fa-handshake wi"></i><h3 data-fr="Négociation commerciale">Business Negotiation</h3><p data-fr="Le langage de la négociation stratégique, des concessions et de la conclusion d’accords.">The language of strategic negotiation, concessions and closing deals.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
+      <div class="w" data-r><code>WW-02</code><i class="fas fa-chalkboard-user wi"></i><h3 data-fr="Présentations percutantes">High-Impact Presentations</h3><p data-fr="Livrez des présentations claires et structurées grâce à la méthode PREP.">Deliver clear, structured presentations with the PREP framework.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
+      <div class="w" data-r><code>WW-03</code><i class="fas fa-pen-nib wi"></i><h3 data-fr="Rédaction professionnelle">Professional Writing</h3><p data-fr="Rédigez des e-mails, rapports et propositions qui sont lus et suivis d’effet.">Write emails, reports and proposals that get read and get action.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
+      <div class="w" data-r><code>WW-04</code><i class="fas fa-users wi"></i><h3 data-fr="Réunions et conférences téléphoniques">Meetings &amp; Conference Calls</h3><p data-fr="Animez et rejoignez des réunions et appels internationaux avec assurance.">Lead and join international meetings and calls with confidence.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
+      <div class="w" data-r><code>WW-05</code><i class="fab fa-linkedin wi"></i><h3 data-fr="Optimisation LinkedIn">LinkedIn Optimisation</h3><p data-fr="Construisez un profil professionnel en anglais qui attire des opportunités internationales.">Build an English-language professional profile that attracts global opportunities.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
+    </div>
+    <div class="center-cta"><a class="btn btn-navy btn-lg" href="#contact" data-wa="Windsor Workshops"><i class="fas fa-calendar-check"></i><span data-fr="Réserver un atelier">Book a workshop</span></a></div>
+  </div>
+</section>
+
+<!-- ================= FOR TEAMS ================= -->
+<section class="sec teams" id="teams" data-view>
+  <div class="wrap teams-grid">
+    <div data-r>
+      <span class="eyebrow" data-fr="Pour les équipes RH et formation">For HR and L&amp;D teams</span>
+      <h2 class="h2" data-fr="Une formation que vous pouvez <span class='g'>suivre et mesurer</span>" data-h>Training you can <span class="g">track and measure</span></h2>
+      <p class="lead" style="margin-top:14px" data-fr="Nous nous comportons comme une extension de votre équipe de formation : un audit de départ, un plan clair et un rapport mensuel que vous pouvez présenter à votre direction.">We work as an extension of your L&amp;D team: a starting audit, a clear plan and a monthly report you can show your leadership.</p>
+      <ol class="tsteps">
+        <li><b data-fr="Audit linguistique gratuit">Free language audit</b><span data-fr="Nous mesurons le niveau CECRL de chaque participant et les situations de travail à travailler.">We measure each participant’s CEFR level and the work situations to train.</span></li>
+        <li><b data-fr="Plan sur mesure">Custom plan</b><span data-fr="Contenus de votre secteur, rythme adapté à vos équipes, en présentiel à Abidjan ou en ligne.">Content from your sector, a pace that fits your teams, in Abidjan or online.</span></li>
+        <li><b data-fr="Rapport mensuel pour les RH">Monthly HR report</b><span data-fr="Présence, pratique avec Windsor et progression de chaque apprenant.">Attendance, practice with Windsor and each learner’s progress.</span></li>
+      </ol>
+      <a class="btn btn-gold btn-lg" href="#contact" data-wa="B2B team proposal"><i class="fab fa-whatsapp"></i><span data-fr="Demander une proposition pour mon équipe">Request a proposal for my team</span></a>
+    </div>
+    <figure class="rep" data-r aria-label="Example HR report" data-fr-aria="Exemple de rapport RH">
+      <figcaption><b data-fr="Rapport mensuel RH">Monthly HR report</b><span class="ex" data-fr="Exemple illustratif">Illustrative example</span></figcaption>
+      <div class="kpis">
+        <div><b>94%</b><span data-fr="Présence">Attendance</span></div>
+        <div><b>3.2</b><span data-fr="Séances avec le tuteur IA / semaine">AI tutor sessions / week</span></div>
+        <div><b>10 / 12</b><span data-fr="Apprenants dans les temps">Learners on track</span></div>
+      </div>
+      <ul class="lrn">
+        <li><span>Learner A · B1 → B2</span><i style="--w:78%"></i></li>
+        <li><span>Learner B · A2 → B1</span><i style="--w:64%"></i></li>
+        <li><span>Learner C · B2 → B2+</span><i style="--w:52%"></i></li>
+        <li><span>Learner D · B1 → B1+</span><i style="--w:31%"></i></li>
+      </ul>
+      <p class="note" data-fr="Données fictives, uniquement pour montrer le format du rapport.">Sample data shown only to illustrate the report format.</p>
+    </figure>
+  </div>
+</section>
+
 <!-- ================= PAYMENT ================= -->
-<section class="sec pay" id="payment">
+<section class="sec pay" id="payment" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Paiement">Payment</span>
@@ -310,8 +478,94 @@
   </div>
 </section>
 
+</div>
+
+<div class="page" id="page-learn" data-page="learn" hidden>
+<!-- ================= KORO ================= -->
+<section class="sec dark" id="koro" data-view>
+  <div class="wrap koro-grid">
+    <div data-r>
+      <span class="eyebrow" data-fr="Découvrez Windsor, notre tuteur IA">Meet Windsor, our AI tutor</span>
+      <h2 class="h2" data-fr="Votre tuteur personnel en Business English, <span class='g'>disponible 24 h/24</span>" data-h>Your personal Business English tutor, <span class="g">available 24/7</span></h2>
+      <p class="lead" style="margin-top:16px" data-fr="Windsor connaît votre secteur. Finance, pétrole et gaz, banque, santé ou logistique : obtenez des conseils immédiats sur le vocabulaire, les e-mails et les présentations.">Windsor understands your industry. In finance, oil and gas, banking, healthcare or logistics, get instant guidance on vocabulary, emails and presentations.</p>
+      <div class="feats">
+        <div class="feat"><i class="fas fa-industry"></i><div><h4 data-fr="Un soutien par secteur">Sector-specific support</h4><p data-fr="Finance, pétrole et gaz, banque, droit, santé et plus encore">Finance, oil and gas, banking, legal, healthcare and more</p></div></div>
+        <div class="feat"><i class="fas fa-clock"></i><div><h4 data-fr="Toujours disponible">Always available</h4><p data-fr="Pratiquez à toute heure, partout, sur n’importe quel appareil">Practise at any hour, anywhere, on any device</p></div></div>
+        <div class="feat"><i class="fas fa-chart-line"></i><div><h4 data-fr="Suivi de progression">Progress tracking</h4><p data-fr="Des recommandations adaptées à votre façon d’apprendre">Recommendations that follow how you learn</p></div></div>
+      </div>
+      <a class="btn btn-gold btn-lg" href="#portal"><i class="fas fa-robot"></i><span data-fr="Essayer le quiz de Windsor">Try Windsor's practice quiz</span></a>
+    </div>
+    <div class="chat" data-r aria-label="Windsor chat example" data-fr-aria="Exemple de conversation avec Windsor">
+      <div class="chat-h"><span class="av"><i class="fas fa-robot"></i></span><div><b>Windsor <span style="opacity:.7;font-weight:400;display:inline" data-fr="· Tuteur IA">· AI tutor</span></b><span><span class="dot"></span><span data-fr="En ligne">Online</span></span></div></div>
+      <div class="msgs" id="msgs"></div>
+      <div class="chat-f" data-fr="Posez une question sur le Business English…">Ask about any Business English topic…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PREPOSITIONS IN MOTION ================= -->
+<section class="sec prep" id="practice" data-view>
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Pratique gratuite">Free practice</span>
+      <h2 class="h2" data-fr="Prépositions <span class='g'>en mouvement</span>" data-h>Prepositions <span class="g">in motion</span></h2>
+      <p class="lead" data-fr="Maîtrisez les prépositions les plus mal utilisées en Business English. Regardez-les à l’œuvre dans de vraies phrases professionnelles.">Master the prepositions most often misused in Business English. Watch them work in real professional sentences.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Categories" data-fr-aria="Catégories">
+      <button class="tab" role="tab" data-cat="time" aria-selected="true" data-fr="Temps">Time</button>
+      <button class="tab" role="tab" data-cat="place" aria-selected="false" data-fr="Lieu">Place</button>
+      <button class="tab" role="tab" data-cat="direction" aria-selected="false" data-fr="Direction">Direction</button>
+      <button class="tab" role="tab" data-cat="business" aria-selected="false" data-fr="Affaires">Business</button>
+    </div>
+    <div class="pstage" id="pstage">
+      <div class="scene" id="scene" data-s="at" aria-hidden="true"><div class="bx"></div><div class="bx2"></div><div class="tg"></div><div class="dl"></div><div class="ball"></div><div class="d2"></div></div>
+      <div class="psent" id="psent" aria-live="polite"></div>
+      <div class="pfr" id="pfr"></div>
+      <div class="ptip" id="ptip"></div>
+      <div class="pctl">
+        <button class="ib" id="pprev" type="button" aria-label="Previous" data-fr-aria="Précédent"><i class="fas fa-chevron-left"></i></button>
+        <button class="ib" id="ppause" type="button" aria-label="Pause"><i class="fas fa-pause"></i></button>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+        <button class="ib" id="pnext" type="button" aria-label="Next" data-fr-aria="Suivant"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="pcards" id="pcards"></div>
+    <div class="quiz">
+      <div style="text-align:center;margin-bottom:18px"><span class="eyebrow" data-fr="Exercice rapide">Quick practice</span><h3 style="font:700 1.4rem var(--f-display)" data-fr="Complétez avec la préposition">Fill in the preposition</h3></div>
+      <div id="quiz"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FREE LEVEL CHECK ================= -->
+<section class="sec lvl" id="level" data-view>
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Test de niveau gratuit">Free level check</span>
+      <h2 class="h2" data-fr="Découvrez votre niveau d’anglais <span class='g'>en 3 minutes chrono</span>" data-h>Find your English level <span class="g">in a 3-minute countdown</span></h2>
+      <p class="lead" data-fr="Vingt questions de Business English et 3 minutes au chronomètre : à la fin du temps, la session se termine et votre résultat s’affiche. Vous obtenez un niveau CECRL indicatif et le programme qui vous convient.">Twenty Business English questions and 3 minutes on the clock. When time runs out, the session closes and your result appears. You get an indicative CEFR level and the programme that fits you.</p>
+    </div>
+    <div class="quiz" id="lvlQuiz"></div>
+  </div>
+</section>
+
+<!-- ================= CEFR LEVELS ================= -->
+<section class="sec cefr" id="cefr" data-view>
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="L’échelle du CECRL">The CEFR scale</span>
+      <h2 class="h2" data-fr="Ce que votre niveau <span class='g'>CECRL</span> signifie" data-h>What your <span class="g">CEFR level</span> means</h2>
+      <p class="lead" data-fr="Le Cadre européen commun de référence pour les langues (CECRL) décrit six niveaux, de A1 à C2, regroupés en trois : utilisateur élémentaire, indépendant et expérimenté. Voici ce qu’ils signifient en termes simples, puis au travail.">The Common European Framework of Reference for Languages (CEFR) describes six levels, A1 to C2, grouped into three: Basic, Independent and Proficient User. Here is what they mean in plain words, and then at work.</p>
+    </div>
+    <div class="cefrgrid" id="cefrGrid"></div>
+    <p class="cefrnote"><span data-fr="Résumé dans nos propres mots à partir de l’échelle globale du Conseil de l’Europe. Les lignes « Au travail » sont notre lecture indicative, elles ne font pas partie du CECRL.">Summarised in our own words from the Council of Europe’s global scale. The “At work” lines are our own indicative reading and are not part of the CEFR.</span> <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale" target="_blank" rel="noopener noreferrer" data-fr="Lire les descriptions officielles">Read the official descriptions</a></p>
+    <div class="center-cta"><a class="btn btn-gold btn-lg" href="#level"><i class="fas fa-bullseye"></i><span data-fr="Découvrir mon niveau">Find my level</span></a></div>
+  </div>
+</section>
+
 <!-- ================= TAKE YOUR EXAM ================= -->
-<section class="sec exams" id="exams">
+<section class="sec exams" id="exams" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Passer votre examen">Take your exam</span>
@@ -353,8 +607,32 @@
   </div>
 </section>
 
+<!-- ================= LEARNER PORTAL ================= -->
+<section class="sec dark" id="portal" data-view>
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-fr="Espace apprenant">Learner portal</span>
+      <h2 class="h2" data-fr="Connectez-vous et <span class='g'>pratiquez avec Windsor</span>" data-h>Sign in and <span class="g">practise with Windsor</span></h2>
+    </div>
+    <div class="panel" data-r>
+      <div class="gate" id="gate">
+        <i class="fas fa-lock lk"></i>
+        <p data-fr="Créez un profil de pratique gratuit pour faire le quiz de Business English et suivre votre meilleur score. Votre profil est enregistré sur cet appareil.">Create a free practice profile to take the Business English quiz and track your best score. Your profile is saved on this device.</p>
+        <button type="button" class="btn btn-gold btn-lg" data-open-login><i class="fas fa-right-to-bracket"></i><span data-fr="Accéder au portail">Open the portal</span></button>
+      </div>
+      <div id="app" class="hid">
+        <div class="pbar"><span><i class="fas fa-circle-user"></i> <span id="who"></span></span><button type="button" id="logoutBtn" data-fr="Déconnexion">Log out</button></div>
+        <div id="quizBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="page" id="page-engage" data-page="engage" hidden>
 <!-- ================= EVENTS ================= -->
-<section class="sec events" id="events">
+<section class="sec events" id="events" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Événements">Events</span>
@@ -371,210 +649,8 @@
   </div>
 </section>
 
-<!-- ================= SECTORS ================= -->
-<section class="sec" id="sectors">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Par secteur">By sector</span>
-      <h2 class="h2" data-fr="L’anglais que parle <span class='g'>votre métier</span>" data-h>The English your <span class="g">industry speaks</span></h2>
-      <p class="lead" data-fr="Les cours Windsor utilisent le vocabulaire et les situations de votre secteur. Voici un aperçu de ce que vous pratiquerez.">Windsor lessons use the vocabulary and situations of your sector. Here is a taste of what you will practise.</p>
-    </div>
-    <div class="tabs stabs" id="secTabs" role="tablist" aria-label="Sectors" data-fr-aria="Secteurs"></div>
-    <div class="phgrid" id="secCards" aria-live="polite"></div>
-    <div class="center-cta"><a class="btn btn-navy btn-lg" href="#contact" data-wa="English for my sector"><i class="fab fa-whatsapp"></i><span data-fr="Demander un programme pour mon secteur">Ask for a programme for my sector</span></a></div>
-  </div>
-</section>
-
-<!-- ================= KORO ================= -->
-<section class="sec dark" id="koro">
-  <div class="wrap koro-grid">
-    <div data-r>
-      <span class="eyebrow" data-fr="Découvrez Windsor, notre tuteur IA">Meet Windsor, our AI tutor</span>
-      <h2 class="h2" data-fr="Votre tuteur personnel en Business English, <span class='g'>disponible 24 h/24</span>" data-h>Your personal Business English tutor, <span class="g">available 24/7</span></h2>
-      <p class="lead" style="margin-top:16px" data-fr="Windsor connaît votre secteur. Finance, pétrole et gaz, banque, santé ou logistique : obtenez des conseils immédiats sur le vocabulaire, les e-mails et les présentations.">Windsor understands your industry. In finance, oil and gas, banking, healthcare or logistics, get instant guidance on vocabulary, emails and presentations.</p>
-      <div class="feats">
-        <div class="feat"><i class="fas fa-industry"></i><div><h4 data-fr="Un soutien par secteur">Sector-specific support</h4><p data-fr="Finance, pétrole et gaz, banque, droit, santé et plus encore">Finance, oil and gas, banking, legal, healthcare and more</p></div></div>
-        <div class="feat"><i class="fas fa-clock"></i><div><h4 data-fr="Toujours disponible">Always available</h4><p data-fr="Pratiquez à toute heure, partout, sur n’importe quel appareil">Practise at any hour, anywhere, on any device</p></div></div>
-        <div class="feat"><i class="fas fa-chart-line"></i><div><h4 data-fr="Suivi de progression">Progress tracking</h4><p data-fr="Des recommandations adaptées à votre façon d’apprendre">Recommendations that follow how you learn</p></div></div>
-      </div>
-      <a class="btn btn-gold btn-lg" href="#portal"><i class="fas fa-robot"></i><span data-fr="Essayer le quiz de Windsor">Try Windsor's practice quiz</span></a>
-    </div>
-    <div class="chat" data-r aria-label="Windsor chat example" data-fr-aria="Exemple de conversation avec Windsor">
-      <div class="chat-h"><span class="av"><i class="fas fa-robot"></i></span><div><b>Windsor <span style="opacity:.7;font-weight:400;display:inline" data-fr="· Tuteur IA">· AI tutor</span></b><span><span class="dot"></span><span data-fr="En ligne">Online</span></span></div></div>
-      <div class="msgs" id="msgs"></div>
-      <div class="chat-f" data-fr="Posez une question sur le Business English…">Ask about any Business English topic…</div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WORKSHOPS ================= -->
-<section class="sec" id="workshops">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Ateliers Windsor">Windsor Workshops</span>
-      <h2 class="h2" data-fr="Des modules intensifs <span class='g'>d’une journée</span>" data-h>Intensive one-day <span class="g">skill modules</span></h2>
-      <p class="lead" data-fr="Chaque atelier est une immersion de 7 heures dans une compétence clé de la communication professionnelle.">Each workshop is a 7-hour deep dive into one key business communication skill.</p>
-    </div>
-    <div class="ws">
-      <div class="w" data-r><code>WW-01</code><i class="fas fa-handshake wi"></i><h3 data-fr="Négociation commerciale">Business Negotiation</h3><p data-fr="Le langage de la négociation stratégique, des concessions et de la conclusion d’accords.">The language of strategic negotiation, concessions and closing deals.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
-      <div class="w" data-r><code>WW-02</code><i class="fas fa-chalkboard-user wi"></i><h3 data-fr="Présentations percutantes">High-Impact Presentations</h3><p data-fr="Livrez des présentations claires et structurées grâce à la méthode PREP.">Deliver clear, structured presentations with the PREP framework.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
-      <div class="w" data-r><code>WW-03</code><i class="fas fa-pen-nib wi"></i><h3 data-fr="Rédaction professionnelle">Professional Writing</h3><p data-fr="Rédigez des e-mails, rapports et propositions qui sont lus et suivis d’effet.">Write emails, reports and proposals that get read and get action.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
-      <div class="w" data-r><code>WW-04</code><i class="fas fa-users wi"></i><h3 data-fr="Réunions et conférences téléphoniques">Meetings &amp; Conference Calls</h3><p data-fr="Animez et rejoignez des réunions et appels internationaux avec assurance.">Lead and join international meetings and calls with confidence.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
-      <div class="w" data-r><code>WW-05</code><i class="fab fa-linkedin wi"></i><h3 data-fr="Optimisation LinkedIn">LinkedIn Optimisation</h3><p data-fr="Construisez un profil professionnel en anglais qui attire des opportunités internationales.">Build an English-language professional profile that attracts global opportunities.</p><div class="meta" data-fr="7 heures · Tarif sur demande">7 hours · Price on request</div></div>
-    </div>
-    <div class="center-cta"><a class="btn btn-navy btn-lg" href="#contact" data-wa="Windsor Workshops"><i class="fas fa-calendar-check"></i><span data-fr="Réserver un atelier">Book a workshop</span></a></div>
-  </div>
-</section>
-
-<!-- ================= PREPOSITIONS IN MOTION ================= -->
-<section class="sec prep" id="practice">
-  <div class="floaters" id="floaters" aria-hidden="true"></div>
-  <div class="wrap" style="position:relative">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Pratique gratuite">Free practice</span>
-      <h2 class="h2" data-fr="Prépositions <span class='g'>en mouvement</span>" data-h>Prepositions <span class="g">in motion</span></h2>
-      <p class="lead" data-fr="Maîtrisez les prépositions les plus mal utilisées en Business English. Regardez-les à l’œuvre dans de vraies phrases professionnelles.">Master the prepositions most often misused in Business English. Watch them work in real professional sentences.</p>
-    </div>
-    <div class="tabs" role="tablist" aria-label="Categories" data-fr-aria="Catégories">
-      <button class="tab" role="tab" data-cat="time" aria-selected="true" data-fr="Temps">Time</button>
-      <button class="tab" role="tab" data-cat="place" aria-selected="false" data-fr="Lieu">Place</button>
-      <button class="tab" role="tab" data-cat="direction" aria-selected="false" data-fr="Direction">Direction</button>
-      <button class="tab" role="tab" data-cat="business" aria-selected="false" data-fr="Affaires">Business</button>
-    </div>
-    <div class="pstage" id="pstage">
-      <div class="scene" id="scene" data-s="at" aria-hidden="true"><div class="bx"></div><div class="bx2"></div><div class="tg"></div><div class="dl"></div><div class="ball"></div><div class="d2"></div></div>
-      <div class="psent" id="psent" aria-live="polite"></div>
-      <div class="pfr" id="pfr"></div>
-      <div class="ptip" id="ptip"></div>
-      <div class="pctl">
-        <button class="ib" id="pprev" type="button" aria-label="Previous" data-fr-aria="Précédent"><i class="fas fa-chevron-left"></i></button>
-        <button class="ib" id="ppause" type="button" aria-label="Pause"><i class="fas fa-pause"></i></button>
-        <div class="dots" id="dots" aria-hidden="true"></div>
-        <button class="ib" id="pnext" type="button" aria-label="Next" data-fr-aria="Suivant"><i class="fas fa-chevron-right"></i></button>
-      </div>
-    </div>
-    <div class="pcards" id="pcards"></div>
-    <div class="quiz">
-      <div style="text-align:center;margin-bottom:18px"><span class="eyebrow" data-fr="Exercice rapide">Quick practice</span><h3 style="font:700 1.4rem var(--f-display)" data-fr="Complétez avec la préposition">Fill in the preposition</h3></div>
-      <div id="quiz"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CEFR LEVELS ================= -->
-<section class="sec cefr" id="cefr">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="L’échelle du CECRL">The CEFR scale</span>
-      <h2 class="h2" data-fr="Ce que votre niveau <span class='g'>CECRL</span> signifie" data-h>What your <span class="g">CEFR level</span> means</h2>
-      <p class="lead" data-fr="Le Cadre européen commun de référence pour les langues (CECRL) décrit six niveaux, de A1 à C2, regroupés en trois : utilisateur élémentaire, indépendant et expérimenté. Voici ce qu’ils signifient en termes simples, puis au travail.">The Common European Framework of Reference for Languages (CEFR) describes six levels, A1 to C2, grouped into three: Basic, Independent and Proficient User. Here is what they mean in plain words, and then at work.</p>
-    </div>
-    <div class="cefrgrid" id="cefrGrid"></div>
-    <p class="cefrnote"><span data-fr="Résumé dans nos propres mots à partir de l’échelle globale du Conseil de l’Europe. Les lignes « Au travail » sont notre lecture indicative, elles ne font pas partie du CECRL.">Summarised in our own words from the Council of Europe’s global scale. The “At work” lines are our own indicative reading and are not part of the CEFR.</span> <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale" target="_blank" rel="noopener noreferrer" data-fr="Lire les descriptions officielles">Read the official descriptions</a></p>
-    <div class="center-cta"><a class="btn btn-gold btn-lg" href="#level"><i class="fas fa-bullseye"></i><span data-fr="Découvrir mon niveau">Find my level</span></a></div>
-  </div>
-</section>
-
-<!-- ================= FREE LEVEL CHECK ================= -->
-<section class="sec lvl" id="level">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Test de niveau gratuit">Free level check</span>
-      <h2 class="h2" data-fr="Découvrez votre niveau d’anglais <span class='g'>en 3 minutes chrono</span>" data-h>Find your English level <span class="g">in a 3-minute countdown</span></h2>
-      <p class="lead" data-fr="Vingt questions de Business English et 3 minutes au chronomètre : à la fin du temps, la session se termine et votre résultat s’affiche. Vous obtenez un niveau CECRL indicatif et le programme qui vous convient.">Twenty Business English questions and 3 minutes on the clock. When time runs out, the session closes and your result appears. You get an indicative CEFR level and the programme that fits you.</p>
-    </div>
-    <div class="quiz" id="lvlQuiz"></div>
-  </div>
-</section>
-
-<!-- ================= PROMISE & PROOF ================= -->
-<section class="sec promise" id="promise">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Nos engagements">Our commitments</span>
-      <h2 class="h2" data-fr="Des résultats <span class='g'>que vous pouvez nous demander</span>" data-h>Results <span class="g">you can hold us to</span></h2>
-      <p class="lead" data-fr="Nous préférons des engagements mesurables à de grandes promesses.">We prefer measurable commitments to big promises.</p>
-    </div>
-    <div class="proof" id="proofRow"></div>
-    <div class="commit">
-      <article data-r><i class="fas fa-clipboard-check"></i><h3 data-fr="Un point de départ mesuré">A measured starting point</h3><p data-fr="Chaque apprenant passe un test de niveau gratuit avant de commencer, pour que nous partions du bon niveau CECRL.">Every learner takes a free level check before starting, so we begin at the right CEFR level.</p></article>
-      <article data-r><i class="fas fa-chart-line"></i><h3 data-fr="Une progression que l’on voit">Progress you can see</h3><p data-fr="Nous mesurons à nouveau votre niveau à la fin du programme pour comparer avec le point de départ.">We measure your level again at the end of the programme and compare it with where you started.</p></article>
-      <article data-r><i class="fas fa-file-lines"></i><h3 data-fr="Des rapports clairs pour les équipes">Clear reports for teams</h3><p data-fr="Les entreprises reçoivent un rapport mensuel sur la présence, la pratique et la progression.">Companies receive a monthly report on attendance, practice and progress.</p></article>
-      <article data-r><i class="fas fa-comments"></i><h3 data-fr="Un retour honnête">Honest feedback</h3><p data-fr="Vos coachs vous disent précisément ce qu’il faut améliorer, et vous pouvez nous dire ce que nous devons améliorer.">Your coaches tell you exactly what to improve, and you can tell us what we should improve.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= TESTIMONIALS & FEEDBACK ================= -->
-<section class="sec" id="testimonials">
-  <div class="wrap">
-    <div class="head center"><span class="eyebrow" data-fr="Témoignages">Success stories</span><h2 class="h2" data-fr="Ce que disent <span class='g'>nos apprenants</span>" data-h>What our <span class="g">learners say</span></h2></div>
-    <div class="quotes" id="quotes"></div>
-    <div class="fbbox" data-r>
-      <div class="fbintro">
-        <span class="eyebrow" data-fr="Votre avis compte">Your voice matters</span>
-        <h3 data-fr="Partagez votre expérience avec Windsor">Share your experience with Windsor</h3>
-        <p data-fr="Votre retour nous aide à nous améliorer et aide d’autres professionnels à choisir. Avec votre accord, nous pourrons le publier ici.">Your feedback helps us improve and helps other professionals choose. With your permission, we may publish it here.</p>
-        <ul>
-          <li><i class="fas fa-star"></i><span data-fr="Notez votre expérience de 1 à 5">Rate your experience from 1 to 5</span></li>
-          <li><i class="fas fa-briefcase"></i><span data-fr="Dites-nous ce qui a changé au travail">Tell us what changed at work</span></li>
-          <li><i class="fas fa-lock"></i><span data-fr="Rien n’est publié sans votre accord">Nothing is published without your consent</span></li>
-        </ul>
-      </div>
-      <div class="fbhost" id="fbHost"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HOW IT WORKS ================= -->
-<section class="sec how" id="how">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow" data-fr="Comment ça marche">How it works</span>
-      <h2 class="h2" data-fr="Du premier échange à des <span class='g'>résultats mesurables</span>" data-h>From first message to <span class="g">measurable results</span></h2>
-    </div>
-    <div class="hows">
-      <div data-r><small data-fr="Étape 1">Step 1</small><h3 data-fr="Consultation gratuite et test de niveau">Free consultation and level check</h3><p data-fr="Nous confrontons votre poste, votre secteur et votre niveau CECRL à l’anglais que votre carrière exige.">We match your role, sector and CEFR level to the English your career demands.</p></div>
-      <div data-r><small data-fr="Étape 2">Step 2</small><h3 data-fr="Un parcours bâti autour de votre métier">A track built around your work</h3><p data-fr="Du coaching en direct, avec de vrais e-mails, réunions et présentations de votre secteur.">Live coaching with real emails, meetings and presentations from your own industry.</p></div>
-      <div data-r><small data-fr="Étape 3">Step 3</small><h3 data-fr="Pratiquez chaque jour avec Windsor">Practise daily with Windsor</h3><p data-fr="Connectez-vous au portail pour des exercices rapides et un retour immédiat, à toute heure.">Sign in to the portal for quick exercises and instant feedback, any time.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOR TEAMS ================= -->
-<section class="sec teams" id="teams">
-  <div class="wrap teams-grid">
-    <div data-r>
-      <span class="eyebrow" data-fr="Pour les équipes RH et formation">For HR and L&amp;D teams</span>
-      <h2 class="h2" data-fr="Une formation que vous pouvez <span class='g'>suivre et mesurer</span>" data-h>Training you can <span class="g">track and measure</span></h2>
-      <p class="lead" style="margin-top:14px" data-fr="Nous nous comportons comme une extension de votre équipe de formation : un audit de départ, un plan clair et un rapport mensuel que vous pouvez présenter à votre direction.">We work as an extension of your L&amp;D team: a starting audit, a clear plan and a monthly report you can show your leadership.</p>
-      <ol class="tsteps">
-        <li><b data-fr="Audit linguistique gratuit">Free language audit</b><span data-fr="Nous mesurons le niveau CECRL de chaque participant et les situations de travail à travailler.">We measure each participant’s CEFR level and the work situations to train.</span></li>
-        <li><b data-fr="Plan sur mesure">Custom plan</b><span data-fr="Contenus de votre secteur, rythme adapté à vos équipes, en présentiel à Abidjan ou en ligne.">Content from your sector, a pace that fits your teams, in Abidjan or online.</span></li>
-        <li><b data-fr="Rapport mensuel pour les RH">Monthly HR report</b><span data-fr="Présence, pratique avec Windsor et progression de chaque apprenant.">Attendance, practice with Windsor and each learner’s progress.</span></li>
-      </ol>
-      <a class="btn btn-gold btn-lg" href="#contact" data-wa="B2B team proposal"><i class="fab fa-whatsapp"></i><span data-fr="Demander une proposition pour mon équipe">Request a proposal for my team</span></a>
-    </div>
-    <figure class="rep" data-r aria-label="Example HR report" data-fr-aria="Exemple de rapport RH">
-      <figcaption><b data-fr="Rapport mensuel RH">Monthly HR report</b><span class="ex" data-fr="Exemple illustratif">Illustrative example</span></figcaption>
-      <div class="kpis">
-        <div><b>94%</b><span data-fr="Présence">Attendance</span></div>
-        <div><b>3.2</b><span data-fr="Séances avec le tuteur IA / semaine">AI tutor sessions / week</span></div>
-        <div><b>10 / 12</b><span data-fr="Apprenants dans les temps">Learners on track</span></div>
-      </div>
-      <ul class="lrn">
-        <li><span>Learner A · B1 → B2</span><i style="--w:78%"></i></li>
-        <li><span>Learner B · A2 → B1</span><i style="--w:64%"></i></li>
-        <li><span>Learner C · B2 → B2+</span><i style="--w:52%"></i></li>
-        <li><span>Learner D · B1 → B1+</span><i style="--w:31%"></i></li>
-      </ul>
-      <p class="note" data-fr="Données fictives, uniquement pour montrer le format du rapport.">Sample data shown only to illustrate the report format.</p>
-    </figure>
-  </div>
-</section>
-
 <!-- ================= BLOG ================= -->
-<section class="sec blog" id="blog">
+<section class="sec blog" id="blog" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Le point Business English du jour">Daily Business English brief</span>
@@ -603,47 +679,8 @@
   </div>
 </section>
 
-<!-- ================= LEARNER PORTAL ================= -->
-<section class="sec dark" id="portal">
-  <div class="wrap">
-    <div class="head center">
-      <span class="eyebrow" data-fr="Espace apprenant">Learner portal</span>
-      <h2 class="h2" data-fr="Connectez-vous et <span class='g'>pratiquez avec Windsor</span>" data-h>Sign in and <span class="g">practise with Windsor</span></h2>
-    </div>
-    <div class="panel" data-r>
-      <div class="gate" id="gate">
-        <i class="fas fa-lock lk"></i>
-        <p data-fr="Créez un profil de pratique gratuit pour faire le quiz de Business English et suivre votre meilleur score. Votre profil est enregistré sur cet appareil.">Create a free practice profile to take the Business English quiz and track your best score. Your profile is saved on this device.</p>
-        <button type="button" class="btn btn-gold btn-lg" data-open-login><i class="fas fa-right-to-bracket"></i><span data-fr="Accéder au portail">Open the portal</span></button>
-      </div>
-      <div id="app" class="hid">
-        <div class="pbar"><span><i class="fas fa-circle-user"></i> <span id="who"></span></span><button type="button" id="logoutBtn" data-fr="Déconnexion">Log out</button></div>
-        <div id="quizBody"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FAQ ================= -->
-<section class="sec" id="faq">
-  <div class="wrap">
-    <div class="head center"><span class="eyebrow">FAQ</span><h2 class="h2" data-fr="Vos questions, <span class='g'>nos réponses</span>" data-h>Questions, <span class="g">answered</span></h2></div>
-    <div class="faq">
-      <details><summary><span data-fr="Qui est Windsor ?">Who is Windsor?</span></summary><p data-fr="Windsor est notre tuteur IA : un partenaire de pratique disponible à toute heure pour le vocabulaire, la rédaction d’e-mails et les présentations dans votre secteur.">Windsor is our AI tutor: a practice partner available at any hour for vocabulary, email writing and presentation skills in your sector.</p></details>
-      <details><summary><span data-fr="Faut-il un certain niveau d’anglais pour commencer ?">Do I need a certain English level to start?</span></summary><p data-fr="Non. Nous commençons par un test de niveau gratuit et vous plaçons sur le bon parcours CECRL, du débutant à l’avancé.">No. We begin with a free level check and place you on the right CEFR track, from beginner to advanced.</p></details>
-      <details><summary><span data-fr="Mon entreprise peut-elle inscrire toute une équipe ?">Can my company enrol a whole team?</span></summary><p data-fr="Oui. Nos programmes B2B sont construits autour de vos équipes et de votre secteur. Écrivez-nous et l’équipe de direction vous répondra avec une proposition.">Yes. Our B2B programmes are built around your teams and your industry. Message us and the management team will reply with a proposal.</p></details>
-      <details><summary><span data-fr="Les cours sont-ils en ligne ou en présentiel ?">Are classes online or in person?</span></summary><p data-fr="Les deux. Windsor est hybride : coaching en direct à Abidjan ou en ligne, plus une pratique quotidienne dans le portail apprenant.">Both. Windsor is hybrid: live coaching in Abidjan or online, plus daily practice in the learner portal.</p></details>
-      <details><summary><span data-fr="Combien coûtent les programmes ?">How much do the programmes cost?</span></summary><p data-fr="Le tarif dépend du programme, de la taille du groupe et du format, c’est pourquoi nous établissons un devis sur demande. Écrivez-nous sur WhatsApp avec votre poste et votre objectif : nous vous répondons avec un devis clair et un test de niveau gratuit.">Fees depend on the programme, the group size and the format, so we quote on request. Message us on WhatsApp with your role and goal and we will reply with a clear quote and a free level check.</p></details>
-      <details><summary><span data-fr="Comment puis-je payer ?">How can I pay?</span></summary><p data-fr="Vous recevez un devis écrit en francs CFA (XOF). Vous pouvez payer par virement bancaire ou mobile money, et nous délivrons un reçu ou une facture pour chaque paiement. Les entreprises et sponsors règlent selon le devis.">You receive a written quote in CFA francs (XOF). You can pay by bank transfer or mobile money, and we issue a receipt or invoice for every payment. Companies and sponsors pay under the quote.</p></details>
-      <details><summary><span data-fr="Proposez-vous des petits groupes ?">Do you offer small groups?</span></summary><p data-fr="Oui, sur demande. Nos groupes comptent habituellement 8 à 12 personnes, mais nous pouvons former un petit groupe de 4 à 6 personnes pour plus d’attention individuelle.">Yes, on request. Groups usually have 8 to 12 people, but we can run a small group of 4 to 6 for more individual attention.</p></details>
-      <details><summary><span data-fr="Êtes-vous un centre d’examen ?">Are you an exam centre?</span></summary><p data-fr="Non. Nous vous préparons aux tests (TOEIC, TOEFL iBT, Linguaskill Business) et vous aidons à choisir et à réserver auprès du fournisseur officiel ou d’un centre agréé. Les tests eux-mêmes sont organisés par leurs fournisseurs.">No. We prepare you for tests (TOEIC, TOEFL iBT, Linguaskill Business) and help you choose and book with the official provider or an approved centre. The tests themselves are run by their providers.</p></details>
-      <details><summary><span data-fr="Comment vous contacter ?">How do I contact you?</span></summary><p data-fr="Écrivez-nous sur WhatsApp au +225 01 02 03 04 05 ou par e-mail à support@windsorbe.com.">Message us on WhatsApp at +225 01 02 03 04 05 or email support@windsorbe.com.</p></details>
-    </div>
-  </div>
-</section>
-
 <!-- ================= JOIN WINDSOR ================= -->
-<section class="sec join" id="join">
+<section class="sec join" id="join" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Rejoignez Windsor">Join Windsor</span>
@@ -713,7 +750,7 @@
 </section>
 
 <!-- ================= JOB VACANCIES (roles shared by partner organisations) ================= -->
-<section class="sec jobs" id="jobs">
+<section class="sec jobs" id="jobs" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Offres d’emploi">Job vacancies</span>
@@ -752,7 +789,7 @@
 </section>
 
 <!-- ================= VOLUNTEER ================= -->
-<section class="sec volunteer" id="volunteer">
+<section class="sec volunteer" id="volunteer" data-view>
   <div class="wrap">
     <div class="head center">
       <span class="eyebrow" data-fr="Bénévolat">Volunteer</span>
@@ -801,20 +838,11 @@
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section class="sec dark cta">
-  <div class="wrap">
-    <h2 class="h2" data-fr="Prêt à vous exprimer avec plus d’autorité ?">Ready to speak with more authority?</h2>
-    <p class="lead" data-fr="Dites-nous quel est votre poste et votre objectif. Nous vous répondrons avec un test de niveau et le programme adapté.">Tell us your role and your goal. We will reply with a level check and the right programme.</p>
-    <div class="cta-btns">
-      <a class="btn btn-wa btn-lg" href="#contact" data-wa=""><i class="fab fa-whatsapp"></i><span data-fr="Écrivez-nous sur WhatsApp">Message us on WhatsApp</span></a>
-      <a class="btn btn-line btn-lg" href="#programmes"><span data-fr="Voir les programmes">Browse programmes</span><i class="fas fa-arrow-right arr"></i></a>
-    </div>
-  </div>
-</section>
+</div>
 
+<div class="page" id="page-contact" data-page="contact" hidden>
 <!-- ================= CONTACT ================= -->
-<section class="sec contact" id="contact">
+<section class="sec contact" id="contact" data-view>
   <div class="wrap">
     <div class="head center"><span class="eyebrow" data-fr="Contact">Contact</span><h2 class="h2" data-fr="Parlons de <span class='g'>vos objectifs</span>" data-h>Let's talk about <span class="g">your goals</span></h2></div>
     <div class="cgrid">
@@ -830,6 +858,28 @@
     </div>
   </div>
 </section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq" data-view>
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow">FAQ</span><h2 class="h2" data-fr="Vos questions, <span class='g'>nos réponses</span>" data-h>Questions, <span class="g">answered</span></h2></div>
+    <div class="faq">
+      <details><summary><span data-fr="Qui est Windsor ?">Who is Windsor?</span></summary><p data-fr="Windsor est notre tuteur IA : un partenaire de pratique disponible à toute heure pour le vocabulaire, la rédaction d’e-mails et les présentations dans votre secteur.">Windsor is our AI tutor: a practice partner available at any hour for vocabulary, email writing and presentation skills in your sector.</p></details>
+      <details><summary><span data-fr="Faut-il un certain niveau d’anglais pour commencer ?">Do I need a certain English level to start?</span></summary><p data-fr="Non. Nous commençons par un test de niveau gratuit et vous plaçons sur le bon parcours CECRL, du débutant à l’avancé.">No. We begin with a free level check and place you on the right CEFR track, from beginner to advanced.</p></details>
+      <details><summary><span data-fr="Mon entreprise peut-elle inscrire toute une équipe ?">Can my company enrol a whole team?</span></summary><p data-fr="Oui. Nos programmes B2B sont construits autour de vos équipes et de votre secteur. Écrivez-nous et l’équipe de direction vous répondra avec une proposition.">Yes. Our B2B programmes are built around your teams and your industry. Message us and the management team will reply with a proposal.</p></details>
+      <details><summary><span data-fr="Les cours sont-ils en ligne ou en présentiel ?">Are classes online or in person?</span></summary><p data-fr="Les deux. Windsor est hybride : coaching en direct à Abidjan ou en ligne, plus une pratique quotidienne dans le portail apprenant.">Both. Windsor is hybrid: live coaching in Abidjan or online, plus daily practice in the learner portal.</p></details>
+      <details><summary><span data-fr="Combien coûtent les programmes ?">How much do the programmes cost?</span></summary><p data-fr="Le tarif dépend du programme, de la taille du groupe et du format, c’est pourquoi nous établissons un devis sur demande. Écrivez-nous sur WhatsApp avec votre poste et votre objectif : nous vous répondons avec un devis clair et un test de niveau gratuit.">Fees depend on the programme, the group size and the format, so we quote on request. Message us on WhatsApp with your role and goal and we will reply with a clear quote and a free level check.</p></details>
+      <details><summary><span data-fr="Comment puis-je payer ?">How can I pay?</span></summary><p data-fr="Vous recevez un devis écrit en francs CFA (XOF). Vous pouvez payer par virement bancaire ou mobile money, et nous délivrons un reçu ou une facture pour chaque paiement. Les entreprises et sponsors règlent selon le devis.">You receive a written quote in CFA francs (XOF). You can pay by bank transfer or mobile money, and we issue a receipt or invoice for every payment. Companies and sponsors pay under the quote.</p></details>
+      <details><summary><span data-fr="Proposez-vous des petits groupes ?">Do you offer small groups?</span></summary><p data-fr="Oui, sur demande. Nos groupes comptent habituellement 8 à 12 personnes, mais nous pouvons former un petit groupe de 4 à 6 personnes pour plus d’attention individuelle.">Yes, on request. Groups usually have 8 to 12 people, but we can run a small group of 4 to 6 for more individual attention.</p></details>
+      <details><summary><span data-fr="Êtes-vous un centre d’examen ?">Are you an exam centre?</span></summary><p data-fr="Non. Nous vous préparons aux tests (TOEIC, TOEFL iBT, Linguaskill Business) et vous aidons à choisir et à réserver auprès du fournisseur officiel ou d’un centre agréé. Les tests eux-mêmes sont organisés par leurs fournisseurs.">No. We prepare you for tests (TOEIC, TOEFL iBT, Linguaskill Business) and help you choose and book with the official provider or an approved centre. The tests themselves are run by their providers.</p></details>
+      <details><summary><span data-fr="Comment vous contacter ?">How do I contact you?</span></summary><p data-fr="Écrivez-nous sur WhatsApp au +225 01 02 03 04 05 ou par e-mail à support@windsorbe.com.">Message us on WhatsApp at +225 01 02 03 04 05 or email support@windsorbe.com.</p></details>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="vnext" id="vnext" hidden></div>
 </main>
 
 <footer class="ftr">

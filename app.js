@@ -91,20 +91,125 @@
     document.addEventListener('click', function (e) { if (!e.target.closest('.has-sub')) closeSubs(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); closeSubs(); } });
 
-    if (!('IntersectionObserver' in window)) return;
-    var links = {};
-    $$('a[href^="#"]:not([data-open-prog])', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
-    var spy = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting && links[e.target.id]) {
-          Object.keys(links).forEach(function (k) { links[k].classList.remove('on'); });
-          links[e.target.id].classList.add('on');
-          $$('.sub-toggle', nav).forEach(function (b) { b.classList.remove('on'); });
-          var par = links[e.target.id].closest('.has-sub'); if (par) par.querySelector('.sub-toggle').classList.add('on');
-        }
+  }
+
+  /* ---------- pages: one short page at a time, with tabs for the sections inside it ---------- */
+  var PAGES = {
+    home: { tabs: null },
+    about: { icon: 'fa-building-columns', title: { en: 'About Windsor', fr: 'À propos de Windsor' }, desc: { en: 'Who we are, how a programme works, the sectors we serve and what learners say.', fr: 'Qui nous sommes, le déroulé d’un programme, les secteurs servis et l’avis des apprenants.' },
+      tabs: [['about', 'About us', 'Qui sommes-nous'], ['how', 'How it works', 'Comment ça marche'], ['sectors', 'Sectors', 'Secteurs'], ['testimonials', 'Results and feedback', 'Résultats et avis']] },
+    programmes: { icon: 'fa-layer-group', title: { en: 'Programmes', fr: 'Programmes' }, desc: { en: 'Nine programmes built around real work situations, for organisations and for individuals.', fr: 'Neuf programmes fondés sur de vraies situations de travail, pour les organisations et les particuliers.' },
+      tabs: [['programmes', 'All programmes', 'Tous les programmes'], ['workshops', 'Workshops', 'Ateliers'], ['teams', 'For teams', 'Pour les équipes'], ['payment', 'Payment', 'Paiement']] },
+    learn: { icon: 'fa-graduation-cap', title: { en: 'Learn with Windsor', fr: 'Apprendre avec Windsor' }, desc: { en: 'Practise with the AI tutor, check your level and prepare for international exams.', fr: 'Pratiquez avec le tuteur IA, testez votre niveau et préparez les examens internationaux.' },
+      tabs: [['koro', 'Windsor AI', 'Windsor IA'], ['practice', 'Free practice', 'Pratique'], ['level', 'Level check', 'Test de niveau'], ['cefr', 'CEFR levels', 'Niveaux CECRL'], ['exams', 'Take your exam', 'Examens'], ['portal', 'Learner portal', 'Espace apprenant']] },
+    engage: { icon: 'fa-people-group', title: { en: 'Get engaged', fr: 'S’engager' }, desc: { en: 'Events, the daily brief, partner vacancies, volunteering and joining Windsor.', fr: 'Événements, brief quotidien, offres des partenaires, bénévolat et rejoindre Windsor.' },
+      tabs: [['events', 'Events', 'Événements'], ['blog', 'Blog', 'Blog'], ['join', 'Join us', 'Nous rejoindre'], ['jobs', 'Job vacancies', 'Offres d’emploi'], ['volunteer', 'Volunteer', 'Bénévolat']] },
+    contact: { icon: 'fa-comments', title: { en: 'Contact', fr: 'Contact' }, desc: { en: 'Book a free consultation, message us on WhatsApp or find quick answers.', fr: 'Réservez une consultation gratuite, écrivez-nous sur WhatsApp ou trouvez des réponses rapides.' },
+      tabs: [['contact', 'Contact us', 'Nous contacter'], ['faq', 'FAQ', 'FAQ']] }
+  };
+  var VIEW_PAGE = {}, HOME_TITLE = document.title;
+  Object.keys(PAGES).forEach(function (p) { (PAGES[p].tabs || []).forEach(function (tb) { VIEW_PAGE[tb[0]] = p; }); });
+
+  function initPages() {
+    var pnav = $('pnav'), vnext = $('vnext'), main = $('main'), cur = { page: null, view: null }, first = true;
+    var NAVLINKS = $$('#nav a[href^="#"]').filter(function (a) { return !a.hasAttribute('data-open-prog'); });
+
+    function resolve(id) {
+      if (PAGES[id]) return { page: id, view: PAGES[id].tabs ? PAGES[id].tabs[0][0] : null, top: true };
+      if (VIEW_PAGE[id]) return { page: VIEW_PAGE[id], view: id, top: true };
+      var n = $(id), pg = n && n.closest('.page');
+      if (pg) return { page: pg.getAttribute('data-page'), view: null, top: false, node: n };
+      return null;
+    }
+    function label(o) { return t({ en: o[0], fr: o[1] }); }
+
+    function renderNav() {
+      var cfg = PAGES[cur.page];
+      if (!cfg.tabs) { pnav.hidden = true; vnext.hidden = true; return; }
+      pnav.hidden = false; pnav.replaceChildren();
+      var band = el('div', 'pband'), w = el('div', 'wrap');
+      var crumbs = el('nav', 'crumbs'); crumbs.setAttribute('aria-label', t({ en: 'Breadcrumb', fr: 'Fil d’Ariane' }));
+      var home = el('a', null, t({ en: 'Home', fr: 'Accueil' })); home.href = '#home';
+      crumbs.appendChild(home); crumbs.appendChild(el('span', null, '›')); crumbs.appendChild(el('span', 'now', t(cfg.title)));
+      var h1 = el('h1', 'pt'); h1.appendChild(el('i', 'fas ' + cfg.icon)); h1.appendChild(document.createTextNode(' ' + t(cfg.title)));
+      w.appendChild(crumbs); w.appendChild(h1); w.appendChild(el('p', 'pd', t(cfg.desc))); band.appendChild(w);
+      var tabs = el('div', 'ptabs'), tw = el('div', 'wrap'), row = el('div', 'ptabs-in'); row.setAttribute('role', 'tablist');
+      cfg.tabs.forEach(function (tb) {
+        var a = el('a', 'ptab' + (tb[0] === cur.view ? ' on' : ''), label([tb[1], tb[2]]));
+        a.href = '#' + tb[0]; a.setAttribute('role', 'tab'); a.setAttribute('aria-selected', String(tb[0] === cur.view)); a.setAttribute('data-tab', tb[0]);
+        if (tb[0] === cur.view) a.setAttribute('aria-current', 'page');
+        row.appendChild(a);
       });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    Object.keys(links).forEach(function (id) { var s = $(id); if (s) spy.observe(s); });
+      tw.appendChild(row); tabs.appendChild(tw);
+      pnav.appendChild(band); pnav.appendChild(tabs);
+      var on = row.querySelector('.ptab.on');
+      if (on && row.scrollWidth > row.clientWidth) row.scrollLeft = Math.max(0, on.offsetLeft - 24);
+
+      /* next step: keeps people moving through the site */
+      vnext.replaceChildren(); vnext.hidden = false;
+      var idx = cfg.tabs.map(function (x) { return x[0]; }).indexOf(cur.view), nw = el('div', 'wrap'), box = el('div', 'vn');
+      var nx = cfg.tabs[idx + 1];
+      if (nx) {
+        var an = el('a', 'vn-next'); an.href = '#' + nx[0];
+        an.appendChild(el('small', null, t({ en: 'Next', fr: 'Suivant' }))); an.appendChild(el('b', null, label([nx[1], nx[2]]))); an.appendChild(el('i', 'fas fa-arrow-right'));
+        box.appendChild(an);
+      }
+      var ac = el('a', 'vn-talk btn btn-gold'); ac.href = '#contact'; ac.appendChild(el('i', 'fab fa-whatsapp')); ac.appendChild(el('span', null, t({ en: 'Talk to Windsor', fr: 'Parler à Windsor' })));
+      if (cur.page === 'contact') ac = null;
+      if (ac) box.appendChild(ac);
+      nw.appendChild(box); vnext.appendChild(nw);
+    }
+
+    function markNav() {
+      NAVLINKS.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1), r = resolve(id), on = !!r && r.page === cur.page && (r.view === cur.view || !r.view);
+        if (PAGES[id] && PAGES[id].tabs) on = r.page === cur.page && (!a.closest('.sub')) ;
+        a.classList.toggle('on', on && (a.closest('.sub') ? r.view === cur.view : true));
+        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+      $$('#nav .has-sub').forEach(function (li) {
+        var hit = $$('a[href^="#"]', li).some(function (a) { var r = resolve(a.getAttribute('href').slice(1)); return r && r.page === cur.page; });
+        li.querySelector('.sub-toggle').classList.toggle('on', hit);
+      });
+    }
+
+    function show(id, opts) {
+      opts = opts || {};
+      var r = resolve(id); if (!r) return false;
+      var changed = r.page !== cur.page, viewChanged = r.view !== cur.view;
+      $$('.page').forEach(function (p) { var on = p.getAttribute('data-page') === r.page; p.hidden = !on; p.classList.toggle('on', on); });
+      $$('.page.on > [data-view]').forEach(function (v) { v.hidden = !!r.view && v.id !== r.view; });
+      cur.page = r.page; cur.view = r.view;
+      renderNav(); markNav();
+      if (changed || viewChanged) {
+        var vis = r.view ? $(r.view) : $('page-' + r.page);
+        if (vis && !REDUCED) { vis.classList.remove('vin'); void vis.offsetWidth; vis.classList.add('vin'); }
+        var cfg = PAGES[r.page], tab = r.view && cfg.tabs.filter(function (x) { return x[0] === r.view; })[0];
+        document.title = r.page === 'home' ? HOME_TITLE : (tab ? label([tab[1], tab[2]]) + ' · ' + t(cfg.title) : t(cfg.title)) + ' · Windsor Business English';
+        if (!first) track('page/' + r.page + (r.view ? '/' + r.view : ''), 'Page ' + r.page + (r.view ? ' ' + r.view : ''));
+      }
+      if (!opts.noScroll) {
+        if (r.top || !r.node) window.scrollTo({ top: 0, left: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        else { var y = r.node.getBoundingClientRect().top + window.scrollY - 84; window.scrollTo({ top: Math.max(0, y), left: 0, behavior: 'auto' }); }
+        if (!first) { try { main.focus({ preventScroll: true }); } catch (e) {} }
+      }
+      if (opts.replace) { try { history.replaceState(null, '', '#' + id); } catch (e) {} }
+      first = false;
+      return true;
+    }
+    window.wbeShow = show;
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      var a = e.target.closest('a[href^="#"]'); if (!a || a.hasAttribute('data-open-prog') || a.target === '_blank') return;
+      var id = a.getAttribute('href').slice(1); if (!id || id === 'main' || !resolve(id)) return;
+      e.preventDefault();
+      if (location.hash !== '#' + id) { try { history.pushState(null, '', '#' + id); } catch (er) { location.hash = id; } }
+      show(id);
+    });
+    window.addEventListener('popstate', function () { show(location.hash.slice(1) || 'home', { noScroll: false }); });
+    document.addEventListener('wbe:lang', function () { if (cur.page) { renderNav(); markNav(); } });
+    show(decodeURIComponent(location.hash.slice(1)) || 'home', { noScroll: !location.hash });
   }
 
   /* ---------- reveal on scroll (only below-the-fold items start hidden) ---------- */
@@ -654,6 +759,7 @@
       var l = e.target.closest('[data-open-prog]'); if (!l) return;
       e.preventDefault();
       var id = l.getAttribute('data-open-prog');
+      if (window.wbeShow) window.wbeShow('programmes', { noScroll: true });
       var target = document.querySelector('.card[data-prog="' + id + '"]') || $('programmes');
       if (target) {
         /* jump instantly (the page uses smooth scrolling, which the modal lock would cut short) so closing the panel leaves you at this programme */
@@ -1019,7 +1125,7 @@
       if (users[email] && users[email] !== h) { msg.textContent = t({ en: 'Incorrect password.', fr: 'Mot de passe incorrect.' }); return; }
       if (!users[email]) { users[email] = h; store(USERS, users); }
       store(SESSION, email); $('loginPass').value = ''; close(); render();
-      $('portal').scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+      window.wbeShow('portal');
     }
     function logout() { try { localStorage.removeItem(SESSION); } catch (e) {} render(); }
 
@@ -1061,7 +1167,7 @@
       if (email) { $('who').textContent = email; start(); }
     }
 
-    $('navLogin').addEventListener('click', function () { store(SESSION) ? $('portal').scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' }) : open(); });
+    $('navLogin').addEventListener('click', function () { store(SESSION) ? window.wbeShow('portal') : open(); });
     $$('[data-open-login]').forEach(function (b) { b.addEventListener('click', open); });
     $('loginClose').addEventListener('click', close);
     modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
@@ -1081,7 +1187,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initProgGrid(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initJobs(); initQuotes(); initPortal(); initCount(); initReveal();
+    initAnalytics(); initTheme(); initCopy(); initHeader(); initMarquee(); initKoro(); initPrep(); initQuiz(); initSectors(); initCefr(); initLevel(); initProgrammes(); initProgGrid(); initFeedback(); initNews(); initProof(); initSocial(); initPhotos(); initEvents(); initJobs(); initQuotes(); initPortal(); initCount(); initReveal(); initPages();
     updateWa(); document.addEventListener('wbe:lang', updateWa);
   });
 })();
