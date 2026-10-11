@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var D = window.WBE_DATA;
-  var WA_NUMBER = '2250758211746';
+  var WA_NUMBER = '2250102030405';
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
@@ -486,7 +486,7 @@
   }
 
   /* ---------- shared: "your message is ready" panel (nothing is sent until a button is tapped) ---------- */
-  var MAIL = 'devilliers02@gmail.com';
+  var MAIL = 'support@windsorbe.com';
   function readyPanel(host, o) {
     track('message-ready/' + (o.event || 'form'), 'Message prepared');
     host.replaceChildren();
