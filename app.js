@@ -5,6 +5,13 @@
   var WA_NUMBER = '2250102030405';
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
+  /* a programme group, found by its own id or by the id of one of its tracks */
+  function groupOf(id) {
+    var G = (window.WBE_DATA && window.WBE_DATA.GROUPS) || [], i;
+    for (i = 0; i < G.length; i++) if (G[i].id === id) return G[i];
+    for (i = 0; i < G.length; i++) if (G[i].tracks.some(function (x) { return x.id === id; })) return G[i];
+    return null;
+  }
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var t = function (o) { return window.WBE.t(o); };
   function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
@@ -98,7 +105,7 @@
     home: { tabs: null },
     about: { icon: 'fa-building-columns', title: { en: 'About Windsor', fr: 'À propos de Windsor' }, desc: { en: 'Who we are, how a programme works, the sectors we serve and what learners say.', fr: 'Qui nous sommes, le déroulé d’un programme, les secteurs servis et l’avis des apprenants.' },
       tabs: [['about', 'About us', 'Qui sommes-nous'], ['how', 'How it works', 'Comment ça marche'], ['sectors', 'Sectors', 'Secteurs'], ['testimonials', 'Results and feedback', 'Résultats et avis']] },
-    programmes: { icon: 'fa-layer-group', title: { en: 'Programmes', fr: 'Programmes' }, desc: { en: 'Nine programmes built around real work situations, for organisations and for individuals.', fr: 'Neuf programmes fondés sur de vraies situations de travail, pour les organisations et les particuliers.' },
+    programmes: { icon: 'fa-layer-group', title: { en: 'Programmes', fr: 'Programmes' }, desc: { en: 'Five programmes built around real work situations, for organisations and for individuals.', fr: 'Cinq programmes fondés sur de vraies situations de travail, pour les organisations et les particuliers.' },
       tabs: [['programmes', 'All programmes', 'Tous les programmes'], ['workshops', 'Workshops', 'Ateliers'], ['teams', 'For teams', 'Pour les équipes'], ['payment', 'Payment', 'Paiement']] },
     learn: { icon: 'fa-graduation-cap', title: { en: 'Learn with Windsor', fr: 'Apprendre avec Windsor' }, desc: { en: 'Practise with the AI tutor, check your level and prepare for international exams.', fr: 'Pratiquez avec le tuteur IA, testez votre niveau et préparez les examens internationaux.' },
       tabs: [['koro', 'Windsor AI', 'Windsor IA'], ['practice', 'Free practice', 'Pratique'], ['level', 'Level check', 'Test de niveau'], ['cefr', 'CEFR levels', 'Niveaux CECRL'], ['exams', 'Take your exam', 'Examens'], ['portal', 'Learner portal', 'Espace apprenant']] },
@@ -630,7 +637,7 @@
   function initProgrammes() {
     var modal = $('progModal'), box = $('pmBox'), grid = document.querySelector('#programmes .grid3');
     if (!modal || !box || !grid) return;
-    var cur = null, opener = null, ptab = 'overview', mode = 'form', lead = { name: '', phone: '', email: '', org: '', format: 'any', msg: '' };
+    var cur = null, curG = null, opener = null, ptab = 'overview', mode = 'form', lead = { name: '', phone: '', email: '', org: '', format: 'any', msg: '' };
     var FORMATS = [
       { value: 'any', label: { en: 'No preference', fr: 'Pas de préférence' }, text: { en: 'no preference', fr: 'pas de préférence' } },
       { value: 'abidjan', label: { en: 'Face to face in Abidjan', fr: 'En présentiel à Abidjan' }, text: { en: 'face to face in Abidjan', fr: 'en présentiel à Abidjan' } },
@@ -683,7 +690,16 @@
       box.replaceChildren();
       var x = el('button', 'mx', '×'); x.type = 'button'; x.setAttribute('aria-label', t({ en: 'Close', fr: 'Fermer' })); x.onclick = close; box.appendChild(x);
       var head = el('div', 'pm-head'), ic = el('div', 'ico'); ic.appendChild(el('i', 'fas ' + P.icon)); head.appendChild(ic);
-      var hd = el('div'); var h3 = el('h3', null, t(P.name)); h3.id = 'pmTitle'; hd.append(h3, el('p', 'tg', t(P.tag))); head.appendChild(hd); box.appendChild(head);
+      var hd = el('div'); var h3 = el('h3', null, t(curG ? curG.name : P.name)); h3.id = 'pmTitle'; hd.append(h3, el('p', 'tg', t(P.tag))); head.appendChild(hd); box.appendChild(head);
+      if (curG && curG.tracks.length > 1) {
+        var trk = el('div', 'pm-tracks'); trk.setAttribute('role', 'tablist'); trk.setAttribute('aria-label', t({ en: 'Choose a track', fr: 'Choisir une option' }));
+        curG.tracks.forEach(function (tr) {
+          var bt = el('button', 'pm-track', t(tr.label)); bt.type = 'button'; bt.setAttribute('role', 'tab'); bt.setAttribute('aria-selected', String(tr.id === cur));
+          bt.onclick = function () { cur = tr.id; ptab = 'overview'; render(); };
+          trk.appendChild(bt);
+        });
+        box.appendChild(trk);
+      }
       var body = el('div', 'pm-body'), info = el('div', 'pm-info');
       var pf = el('figure', 'photo pm-photo'); pf.setAttribute('data-dyn', '1'); photoFill(pf, 'prog-' + P.id, { en: t(P.name), fr: t(P.name) }); info.appendChild(pf);
       info.appendChild(el('p', 'pm-intro', t(P.intro)));
@@ -742,10 +758,10 @@
       alt.appendChild(a1); info.appendChild(alt);
       var side = el('aside', 'pm-form'); body.append(info, side); box.appendChild(body);
       if (mode === 'ready') { mode = 'form'; }
-      buildForm(P, side);
+      buildForm({ id: P.id, name: (curG && curG.tracks.length === 1) ? curG.name : P.name }, side);
     }
     function open(id, from) {
-      cur = id; ptab = 'overview'; opener = from || document.activeElement; mode = 'form';
+      curG = groupOf(id); cur = (curG && curG.id === id) ? curG.tracks[0].id : id; ptab = 'overview'; opener = from || document.activeElement; mode = 'form';
       lead = { name: lead.name, phone: lead.phone, email: lead.email, org: lead.org, format: lead.format, msg: '' };
       render(); modal.classList.add('open'); document.documentElement.classList.add('nolock'); modal.scrollTop = 0;
       var cb = box.querySelector('.mx'); if (cb) cb.focus();
@@ -760,7 +776,7 @@
       e.preventDefault();
       var id = l.getAttribute('data-open-prog');
       if (window.wbeShow) window.wbeShow('programmes', { noScroll: true });
-      var target = document.querySelector('.card[data-prog="' + id + '"]') || $('programmes');
+      var target = document.querySelector('.card[data-prog="' + (groupOf(id) ? groupOf(id).id : id) + '"]') || $('programmes');
       if (target) {
         /* jump instantly (the page uses smooth scrolling, which the modal lock would cut short) so closing the panel leaves you at this programme */
         var root = document.documentElement, prev = root.style.scrollBehavior;
@@ -796,7 +812,7 @@
       var fN = field('fbName', t({ en: 'Your name (optional)', fr: 'Votre nom (facultatif)' }), 'text', '', { auto: 'name' });
       var fR = field('fbRole', t({ en: 'Role and company (optional)', fr: 'Poste et entreprise (facultatif)' }), 'text', '', { auto: 'organization' });
       two.append(fN.wrap, fR.wrap); form.appendChild(two);
-      var opts = D.PROGRAMMES.map(function (p) { return { value: p.id, label: t(p.name) }; }).concat([{ value: 'other', label: t({ en: 'Another Windsor service', fr: 'Un autre service Windsor' }) }]);
+      var opts = D.GROUPS.map(function (p) { return { value: p.id, label: t(p.name) }; }).concat([{ value: 'other', label: t({ en: 'Another Windsor service', fr: 'Un autre service Windsor' }) }]);
       var fP = field('fbProg', t({ en: 'What did you do with Windsor?', fr: 'Qu’avez-vous suivi chez Windsor ?' }), 'select', '', { options: opts });
       form.appendChild(fP.wrap);
       var rw = el('div', 'fld'), rl = el('label', null, t({ en: 'Your rating', fr: 'Votre note' })); rl.id = 'fbRateL'; rw.appendChild(rl);
@@ -818,7 +834,7 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (st.text.trim().length < 10) { err.textContent = t({ en: 'Please write a sentence or two about your experience.', fr: 'Écrivez une ou deux phrases sur votre expérience.' }); fT.input.focus(); return; }
-        var pr = D.PROGRAMMES.filter(function (p) { return p.id === st.prog; })[0], fr = WBE.lang() === 'fr';
+        var pr = D.GROUPS.filter(function (p) { return p.id === st.prog; })[0], fr = WBE.lang() === 'fr';
         var pname = pr ? t(pr.name) : t({ en: 'Windsor', fr: 'Windsor' });
         var who = (st.name.trim() || t({ en: 'a Windsor learner', fr: 'un apprenant Windsor' })) + (st.role.trim() ? ', ' + st.role.trim() : '');
         var msg = fr
@@ -1016,78 +1032,75 @@
   /* ---------- Programmes: filters, category tags and an in-place "quick look" on every card ---------- */
   function initProgGrid() {
     var grid = document.querySelector('#programmes .progs-grid'), bar = $('progFilters');
-    if (!grid || !bar || !D.PROGRAMMES) return;
-    var FILTERS = [
-      { id: 'all', label: { en: 'All programmes', fr: 'Tous les programmes' } },
-      { id: 'orgs', label: { en: 'For organisations', fr: 'Pour les organisations' } },
-      { id: 'pros', label: { en: 'For professionals', fr: 'Pour les professionnels' } },
-      { id: 'careers', label: { en: 'Exams and careers', fr: 'Examens et carrière' } },
-      { id: 'community', label: { en: 'Community and tools', fr: 'Communauté et outils' } }
-    ];
-    var state = { filter: 'all', open: {} };
+    if (!grid || !bar || !D.PROGRAMMES || !D.GROUPS) return;
+    var TAGS = {
+      orgs: { en: 'For organisations', fr: 'Pour les organisations' },
+      pros: { en: 'For professionals', fr: 'Pour les professionnels' },
+      careers: { en: 'Exams and careers', fr: 'Examens et carrière' },
+      community: { en: 'Workshops and community', fr: 'Ateliers et communauté' }
+    };
+    var state = { open: {} };
     function cards() { return $$('.card[data-prog]', grid); }
     function prog(id) { return D.PROGRAMMES.filter(function (p) { return p.id === id; })[0]; }
-    function label(id) { return FILTERS.filter(function (f) { return f.id === id; })[0].label; }
-    function count(f) { return cards().filter(function (c) { return f === 'all' || (c.getAttribute('data-cat') || '').split(' ').indexOf(f) > -1; }).length; }
     function bullets(items) { var u = el('ul'); items.forEach(function (x) { var li = el('li'); li.appendChild(el('i', 'fas fa-check')); li.appendChild(el('span', null, t(x))); u.appendChild(li); }); return u; }
+    function chips(P) { var c = el('div', 'qchips'); P.facts.forEach(function (f) { var s = el('span'); s.appendChild(el('b', null, t(f.k))); s.appendChild(document.createTextNode(' ' + t(f.v))); c.appendChild(s); }); return c; }
+    function goBtn(id, label, cls) {
+      var b = el('button', cls); b.type = 'button'; b.setAttribute('data-prog', id); b.setAttribute('aria-haspopup', 'dialog');
+      b.appendChild(el('span', null, label)); b.appendChild(el('i', 'fas fa-arrow-right arr')); return b;
+    }
 
     function decorate() {
       cards().forEach(function (c) {
         $$('.ctag, .qwrap', c).forEach(function (n) { n.remove(); });
-        var id = c.getAttribute('data-prog'), P = prog(id); if (!P) return;
-        var cat = (c.getAttribute('data-cat') || '').split(' ')[0];
-        var tag = el('span', 'ctag', t(label(cat))), h3 = c.querySelector('h3'); c.insertBefore(tag, h3);
+        var id = c.getAttribute('data-prog'), G = D.GROUPS.filter(function (g) { return g.id === id; })[0]; if (!G) return;
+        var tag = el('span', 'ctag', t(TAGS[G.cat])), h3 = c.querySelector('h3'); c.insertBefore(tag, h3);
         var wrap = el('div', 'qwrap'), open = !!state.open[id], pid = 'ql-' + id;
         var tg = el('button', 'qtoggle'); tg.type = 'button'; tg.setAttribute('aria-expanded', String(open)); tg.setAttribute('aria-controls', pid);
         tg.appendChild(el('span', null, open ? t({ en: 'Hide quick look', fr: 'Masquer l’aperçu' }) : t({ en: 'Quick look', fr: 'Aperçu rapide' }))); tg.appendChild(el('i', 'fas fa-chevron-down'));
         tg.addEventListener('click', function (e) { e.stopPropagation(); state.open[id] = !state.open[id]; decorate(); syncExpandAll(); });
         var panel = el('div', 'qpanel' + (open ? ' open' : '')); panel.id = pid;
         var inner = el('div', 'qin');
-        var chips = el('div', 'qchips'); P.facts.forEach(function (f) { var s = el('span'); s.appendChild(el('b', null, t(f.k))); s.appendChild(document.createTextNode(' ' + t(f.v))); chips.appendChild(s); });
-        inner.appendChild(chips);
-        var cols = el('div', 'qcols');
-        var c1 = el('div'); c1.appendChild(el('h4', null, t({ en: 'Who it is for', fr: 'À qui il s’adresse' }))); c1.appendChild(bullets(P.who));
-        var c2 = el('div'); c2.appendChild(el('h4', null, t({ en: 'You will achieve', fr: 'Vous atteindrez' }))); c2.appendChild(bullets(P.outcomes));
-        cols.append(c1, c2); inner.appendChild(cols);
-        var more = el('button', 'btn btn-gold btn-sm qmore'); more.type = 'button'; more.setAttribute('data-prog', id); more.setAttribute('aria-haspopup', 'dialog');
-        more.appendChild(el('span', null, t({ en: 'Full syllabus and quote', fr: 'Programme détaillé et devis' }))); more.appendChild(el('i', 'fas fa-arrow-right arr'));
-        inner.appendChild(more); panel.appendChild(inner);
+        if (G.tracks.length === 1) {
+          var P = prog(G.tracks[0].id);
+          inner.appendChild(chips(P));
+          var cols = el('div', 'qcols');
+          var c1 = el('div'); c1.appendChild(el('h4', null, t({ en: 'Who it is for', fr: 'À qui il s’adresse' }))); c1.appendChild(bullets(P.who));
+          var c2 = el('div'); c2.appendChild(el('h4', null, t({ en: 'You will achieve', fr: 'Vous atteindrez' }))); c2.appendChild(bullets(P.outcomes));
+          cols.append(c1, c2); inner.appendChild(cols);
+        } else {
+          var tl = el('div', 'qtracks');
+          G.tracks.forEach(function (tr) {
+            var P = prog(tr.id), bx = el('div', 'qtrack'), top = el('div', 'qtl');
+            top.appendChild(el('h4', null, t(tr.label)));
+            top.appendChild(goBtn(tr.id, t({ en: 'Details', fr: 'Détails' }), 'qtgo'));
+            bx.appendChild(top); bx.appendChild(el('p', 'qti', t(P.tag))); bx.appendChild(chips(P)); tl.appendChild(bx);
+          });
+          inner.appendChild(tl);
+        }
+        inner.appendChild(goBtn(id, t({ en: 'Full syllabus and quote', fr: 'Programme détaillé et devis' }), 'btn btn-gold btn-sm qmore'));
+        panel.appendChild(inner);
         wrap.append(tg, panel);
         var cta = c.querySelector(':scope > .btn'); c.insertBefore(wrap, cta);
         if (!open) { panel.setAttribute('inert', ''); }
       });
     }
-    function apply() {
-      cards().forEach(function (c) {
-        var show = state.filter === 'all' || (c.getAttribute('data-cat') || '').split(' ').indexOf(state.filter) > -1;
-        c.hidden = !show;
-      });
-      grid.classList.toggle('filtered', state.filter !== 'all');
-    }
     function syncExpandAll() {
-      var vis = cards().filter(function (c) { return !c.hidden; });
+      var vis = cards();
       var all = vis.length && vis.every(function (c) { return state.open[c.getAttribute('data-prog')]; });
       var b = $('progExpandAll'); if (b) { b.setAttribute('aria-pressed', String(!!all)); b.querySelector('span').textContent = all ? t({ en: 'Collapse all', fr: 'Tout replier' }) : t({ en: 'Expand all', fr: 'Tout déplier' }); }
     }
     function buildBar() {
       bar.replaceChildren();
-      var left = el('div', 'pfl');
-      FILTERS.forEach(function (f) {
-        var b = el('button', 'pf'); b.type = 'button'; b.setAttribute('aria-pressed', String(state.filter === f.id));
-        b.appendChild(el('span', null, t(f.label))); b.appendChild(el('em', null, String(count(f.id))));
-        b.onclick = function () { state.filter = f.id; apply(); buildBar(); syncExpandAll(); };
-        left.appendChild(b);
-      });
+      bar.appendChild(el('span', 'pcount', t({ en: '5 programmes · the Windsor LMS is included in all of them', fr: '5 programmes · le LMS Windsor est inclus dans chacun' })));
       var ex = el('button', 'pexp'); ex.type = 'button'; ex.id = 'progExpandAll'; ex.appendChild(el('span', null, t({ en: 'Expand all', fr: 'Tout déplier' }))); ex.appendChild(el('i', 'fas fa-up-down'));
       ex.onclick = function () {
-        var vis = cards().filter(function (c) { return !c.hidden; });
-        var all = vis.every(function (c) { return state.open[c.getAttribute('data-prog')]; });
-        vis.forEach(function (c) { state.open[c.getAttribute('data-prog')] = !all; });
+        var all = cards().every(function (c) { return state.open[c.getAttribute('data-prog')]; });
+        cards().forEach(function (c) { state.open[c.getAttribute('data-prog')] = !all; });
         decorate(); syncExpandAll();
       };
-      bar.append(left, ex);
+      bar.appendChild(ex);
     }
-    function paint() { decorate(); apply(); buildBar(); syncExpandAll(); }
+    function paint() { decorate(); buildBar(); syncExpandAll(); }
     document.addEventListener('wbe:lang', paint);
     paint();
   }

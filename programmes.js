@@ -86,4 +86,14 @@
   P[0].facts[1] = f(b('Group size', 'Taille du groupe'), b('8 to 12, or a small group of 4 to 6 on request', '8 à 12, ou petit groupe de 4 à 6 sur demande'));
   P[2].facts.push(f(b('Groups', 'Groupes'), b('Small group of 4 to 6 on request', 'Petit groupe de 4 à 6 sur demande')));
   window.WBE_DATA.PROGRAMMES = P;
+  /* The five programmes shown on the site. Each groups one or more of the detailed tracks above; nothing is removed from the detail panels. */
+  window.WBE_DATA.GROUPS = [
+    { id: 'teams', cat: 'orgs', icon: 'fa-building', name: b('Corporate and Team Training', 'Formation Corporate et Équipes'),
+      tracks: [{ id: 'corporate', label: b('Corporate Programme', 'Programme Corporate') }, { id: 'b2b', label: b('B2B Solutions', 'Solutions B2B') }, { id: 'startups', label: b('Startups', 'Startups') }] },
+    { id: 'executive', cat: 'pros', icon: 'fa-user-tie', name: b('Executive English Coaching', 'Coaching d’anglais pour dirigeants'), tracks: [{ id: 'executive' }] },
+    { id: 'certs', cat: 'careers', icon: 'fa-certificate', name: b('International Certifications', 'Certifications internationales'), tracks: [{ id: 'certs' }] },
+    { id: 'interview', cat: 'careers', icon: 'fa-microphone', name: b('Career and Interview Studio', 'Studio Carrière et Entretiens'), tracks: [{ id: 'interview' }] },
+    { id: 'community', cat: 'community', icon: 'fa-users', name: b('Workshops and Business Club', 'Ateliers et Club Business English'),
+      tracks: [{ id: 'workshops', label: b('Workshops', 'Ateliers') }, { id: 'club', label: b('Business English Club', 'Club Business English') }] }
+  ];
 })();
